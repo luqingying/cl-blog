@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csayl.clblog.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.csayl.clblog.model.domain.Article">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="article_user_id" jdbcType="BIGINT" property="articleUserId" />
+    <result column="article_name" jdbcType="VARCHAR" property="articleName" />
+    <result column="article_cover_url" jdbcType="VARCHAR" property="articleCoverUrl" />
+    <result column="article_description" jdbcType="VARCHAR" property="articleDescription" />
+    <result column="article_reading" jdbcType="INTEGER" property="articleReading" />
+    <result column="article_is_deleted" jdbcType="BIT" property="articleIsDeleted" />
+    <result column="article_is_top" jdbcType="BIT" property="articleIsTop" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    article_id, article_user_id, article_name, article_cover_url, article_description, 
+    article_reading, article_is_deleted, article_is_top, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByExample" parameterType="com.csayl.clblog.model.domain.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tbl_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.csayl.clblog.model.domain.ArticleExample">
+    delete from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.csayl.clblog.model.domain.Article">
+    <selectKey keyProperty="articleId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tbl_article (article_user_id, article_name, article_cover_url, 
+      article_description, article_reading, article_is_deleted, 
+      article_is_top, gmt_create, gmt_modified
+      )
+    values (#{articleUserId,jdbcType=BIGINT}, #{articleName,jdbcType=VARCHAR}, #{articleCoverUrl,jdbcType=VARCHAR}, 
+      #{articleDescription,jdbcType=VARCHAR}, #{articleReading,jdbcType=INTEGER}, #{articleIsDeleted,jdbcType=BIT}, 
+      #{articleIsTop,jdbcType=BIT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.csayl.clblog.model.domain.Article">
+    <selectKey keyProperty="articleId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tbl_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleUserId != null">
+        article_user_id,
+      </if>
+      <if test="articleName != null">
+        article_name,
+      </if>
+      <if test="articleCoverUrl != null">
+        article_cover_url,
+      </if>
+      <if test="articleDescription != null">
+        article_description,
+      </if>
+      <if test="articleReading != null">
+        article_reading,
+      </if>
+      <if test="articleIsDeleted != null">
+        article_is_deleted,
+      </if>
+      <if test="articleIsTop != null">
+        article_is_top,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleUserId != null">
+        #{articleUserId,jdbcType=BIGINT},
+      </if>
+      <if test="articleName != null">
+        #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCoverUrl != null">
+        #{articleCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDescription != null">
+        #{articleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReading != null">
+        #{articleReading,jdbcType=INTEGER},
+      </if>
+      <if test="articleIsDeleted != null">
+        #{articleIsDeleted,jdbcType=BIT},
+      </if>
+      <if test="articleIsTop != null">
+        #{articleIsTop,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.csayl.clblog.model.domain.ArticleExample" resultType="java.lang.Long">
+    select count(*) from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_article
+    <set>
+      <if test="record.articleId != null">
+        article_id = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleUserId != null">
+        article_user_id = #{record.articleUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleName != null">
+        article_name = #{record.articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleCoverUrl != null">
+        article_cover_url = #{record.articleCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleDescription != null">
+        article_description = #{record.articleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleReading != null">
+        article_reading = #{record.articleReading,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleIsDeleted != null">
+        article_is_deleted = #{record.articleIsDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.articleIsTop != null">
+        article_is_top = #{record.articleIsTop,jdbcType=BIT},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_article
+    set article_id = #{record.articleId,jdbcType=BIGINT},
+      article_user_id = #{record.articleUserId,jdbcType=BIGINT},
+      article_name = #{record.articleName,jdbcType=VARCHAR},
+      article_cover_url = #{record.articleCoverUrl,jdbcType=VARCHAR},
+      article_description = #{record.articleDescription,jdbcType=VARCHAR},
+      article_reading = #{record.articleReading,jdbcType=INTEGER},
+      article_is_deleted = #{record.articleIsDeleted,jdbcType=BIT},
+      article_is_top = #{record.articleIsTop,jdbcType=BIT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csayl.clblog.model.domain.Article">
+    update tbl_article
+    <set>
+      <if test="articleUserId != null">
+        article_user_id = #{articleUserId,jdbcType=BIGINT},
+      </if>
+      <if test="articleName != null">
+        article_name = #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCoverUrl != null">
+        article_cover_url = #{articleCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDescription != null">
+        article_description = #{articleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReading != null">
+        article_reading = #{articleReading,jdbcType=INTEGER},
+      </if>
+      <if test="articleIsDeleted != null">
+        article_is_deleted = #{articleIsDeleted,jdbcType=BIT},
+      </if>
+      <if test="articleIsTop != null">
+        article_is_top = #{articleIsTop,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csayl.clblog.model.domain.Article">
+    update tbl_article
+    set article_user_id = #{articleUserId,jdbcType=BIGINT},
+      article_name = #{articleName,jdbcType=VARCHAR},
+      article_cover_url = #{articleCoverUrl,jdbcType=VARCHAR},
+      article_description = #{articleDescription,jdbcType=VARCHAR},
+      article_reading = #{articleReading,jdbcType=INTEGER},
+      article_is_deleted = #{articleIsDeleted,jdbcType=BIT},
+      article_is_top = #{articleIsTop,jdbcType=BIT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>

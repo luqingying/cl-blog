@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql:///cl_blog"
+                        userId=""
+                        password="">
+            <!--设置为 true 可以获取 tables 信息, 解决生成文件缺少 xxxByPrimaryKey 的问题 -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.csayl.clblog.model.domain"
+                            targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject=".\src\main\resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.csayl.clblog.mapper"
+                             targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <!--<table domainObjectName="Log" mapperName="LogMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="sys_log">
+            <generatedKey column="log_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table domainObjectName="Article" mapperName="ArticleMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_article">
+            <generatedKey column="article_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table domainObjectName="FriendlyLink" mapperName="FriendlyLinkMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_friendly_link">
+            <generatedKey column="link_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table domainObjectName="ArticleContent" mapperName="ArticleContentMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_article_content">
+            <generatedKey column="content_id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </table>
+        <table domainObjectName="ArticleCategory" mapperName="ArticleCategoryMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_article_category">
+            <generatedKey column="article_category_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table domainObjectName="Category" mapperName="CategoryMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_category">
+            <generatedKey column="category_id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+        <table domainObjectName="Comment" mapperName="CommentMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_comment">
+            <generatedKey column="comment_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!-- <table domainObjectName="Image" mapperName="ImageMapper"
+                enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_image">
+             <generatedKey column="image_id" sqlStatement="Mysql" identity="true"/>
+         </table>-->
+        <!--<table domainObjectName="User" mapperName="UserMapper"
+               enableDeleteByPrimaryKey="true" enableUpdateByPrimaryKey="true" tableName="tbl_user">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+    </context>
+</generatorConfiguration>
