@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About-US</title>
+</head>
+<link rel="stylesheet" href="../static/css/global.css" type="text/css" />
+<link rel="stylesheet" href="../static/scss/global.css" type="text/css" />
+<link rel="stylesheet" href="../static/scss/about.css" type="text/css" />
+<style type="text/css">
+
+    h2{
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+    }
+    .container{
+        /*width:1000px;*/
+        position: absolute;
+        top:0;  bottom: 0;
+        left: 0;right:0;
+        margin:auto;
+        background-color: #fbfbfb;
+    }
+
+    @media (min-width: 992px),
+    (min-width: 1200px) {
+        #HALF-L.enlarge, #HALF-R.enlarge {
+            z-index: 3;
+            transform: scale(1.5);
+            position: absolute;
+        }
+    }
+    .profile-picture{
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        position: absolute;
+        left:50%;
+        top:50px;
+        margin-left: -40px;
+    }
+    .introduce-pgh{
+        text-indent: 2em;
+        text-align: justify;
+        color: #3d3d3f;
+        width: 80%;
+        margin: 0 auto;
+        position: absolute;
+        top:180px;
+        left:10%;
+    }
+</style>
+<body>
+    <div class="container">
+        <div  id="HALF-L" class="half-page" :class="{'enlarge':enter1}"  @mouseenter="enter1 = !enter1" @mouseleave="enter1 = !enter1">
+            <img src="../static/img/C.png" class="profile-picture">
+            <h2>陈辰</h2>
+            <p class="introduce-pgh">你好，我是陈辰,后面是陈辰想说的一句话，但是他还没有想好，我就这样子写一写吧！对了！陈猪猪是猪猪！</p>
+        </div>
+
+        <div  id="HALF-R" class="half-page" :class="{'enlarge':enter2}"  @mouseenter="enter2 = !enter2" @mouseleave="enter2 = !enter2">
+            <img src="../static/img/L.png" class="profile-picture">
+            <h2>卢青莹</h2>
+            <p class="introduce-pgh">你好，我是卢青莹，后面是陈辰想说的一句话，但是他还没有想好，我就这样子写一写吧！对了！陈猪猪是猪猪！</p>
+        </div>
+    </div>
+</body>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/vue.js"></script>
+<script type="text/javascript">
+
+    new Vue({
+        el: '.container',
+        data: {
+            enter1: false,
+            enter2: false
+        }
+    })
+
+
+
+</script>
+</html>
+
+<!--紫色：#7a7383，#c9c0d3，#f0e4fc,#7b7381
+红：#935556，#a47c7c，#e9d2cc，#e0cdd1，#ead0d1
+蓝：#8996a6，#a1a6bc，#c2c8d8，#9da9b8
+绿：#788a72，#96a48b，#e1e3e2，#c8c6ba,#b5c3b1
+黄：#f9e9da，#d6c8ae，#fbeada，
+灰：#c0bcbd-->

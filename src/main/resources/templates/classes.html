@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类</title>
+</head>
+<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
+<style type="text/css">
+
+    @media (max-width: 768px) {
+        .selectClass{
+            display: inline;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .selectClass{
+            display: inline;
+        }
+    }
+    @media (min-width: 992px) {
+        .selectClass{
+            display: none;
+        }
+    }
+    @media (min-width: 1200px) {
+        .selectClass{
+            display: none;
+        }
+    }
+</style>
+<body>
+    <div class="top-nav">
+    <div class="container top-nav-container">
+        <ul class="top-nav-ul">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+    <div class="small-nav" >
+        <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
+        <ul class="snav-ul" v-show="isShow">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+</div>
+    <div class="center-bar">
+        <div class="container">
+            <div class="articles-bar main">
+                <div class="selectClass">
+                    <select id="classSelect" class="topSelectBar">
+                        <option value="java">Java</option>
+                        <option value="html">Html</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JavaScript</option>
+                    </select>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-brief">
+                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <div class="title-spans">
+                            <span>2018-1-18</span>
+                            <span>陈辰</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="pagination">
+                    <li>&laquo;</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>&raquo;</li>
+                </ul>
+            </div>
+            <div class="right-sidebar sidebar">
+                <div id="latest-articel" class="partOfsidebar">
+                    <h2 class="sidebar-title">分类目录</h2>
+                    <ul class="sidebar-ul">
+                        <li>Java</li>
+                        <li>spring</li>
+                        <li>HTML</li>
+                        <li>css</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="webpage-footer">
+    </div>
+</body>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/vue.js"></script>
+<script src="../static/js/global.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

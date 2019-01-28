@@ -1,0 +1,32 @@
+$pic-width: 50px;
+$global-padding:15px;
+.profile-picture{
+  width: $pic-width;
+  height: $pic-width;
+}
+.comment-content{
+  margin-top:-25px;
+  margin-bottom: 0;
+  margin-left:$pic-width + $global-padding;
+}
+.comment-bar time{
+  padding: $global-padding;
+}
+.reply-comment{
+  margin-left:$pic-width + $global-padding;
+}
+
+
+$sm-pic-width:40px;
+.sm-profile-picture{
+  width: $sm-pic-width;
+}
+.comment-reply-bar .comment-content{
+  margin-left: $sm-pic-width + $global-padding;
+  top:$global-padding;
+}
+.comment-reply-bar .reply-comment{
+  margin-left: $sm-pic-width + $global-padding;
+  position: relative;
+  top:15px;
+}

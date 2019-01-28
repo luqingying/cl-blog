@@ -1,0 +1,42 @@
+$pp-width:80px;
+$pp-margin-left: -$pp-width/2;
+.profile-picture{
+  width:$pp-width;
+  margin-left:$pp-margin-left;
+}
+
+$pp-top:50px;
+.profile-picture{
+  top:$pp-top;
+}
+h2{
+  top:$pp-top + 70px;
+}
+.introduce-pgh{
+  top:$pp-top + 130px;
+}
+
+$bgcolorL: #9da9b8;
+$bgcolorR: #ead0d1;
+
+#HALF-L{
+  background-color: $bgcolorL;
+  left: 0;
+}
+#HALF-R{
+  background-color: $bgcolorR;
+  right: 0;
+}
+
+$introduce-H:80%;
+$introduce-top:(100% - $introduce-H )/2;
+#HALF-L, #HALF-R{
+  width: 49.5%;
+  height:$introduce-H;
+  display: inline-block;
+  transform: scale(1);
+  transition: all 0.5s;
+  z-index: 1;
+  position: absolute;
+  top:$introduce-top;
+}

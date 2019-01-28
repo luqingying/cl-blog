@@ -1,0 +1,32 @@
+.profile-picture {
+  width: 80px;
+  margin-left: -40px; }
+
+.profile-picture {
+  top: 50px; }
+
+h2 {
+  top: 120px; }
+
+.introduce-pgh {
+  top: 180px; }
+
+#HALF-L {
+  background-color: #9da9b8;
+  left: 0; }
+
+#HALF-R {
+  background-color: #ead0d1;
+  right: 0; }
+
+#HALF-L, #HALF-R {
+  width: 49.5%;
+  height: 80%;
+  display: inline-block;
+  transform: scale(1);
+  transition: all 0.5s;
+  z-index: 1;
+  position: absolute;
+  top: 10%; }
+
+/*# sourceMappingURL=about.css.map */

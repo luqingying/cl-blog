@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>友链</title>
+</head>
+<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
+<body>
+<style type="text/css">
+    .webpage-footer{
+        position: fixed;
+        bottom: 0;
+    }
+</style>
+<div class="top-nav">
+    <div class="container top-nav-container">
+        <ul class="top-nav-ul">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+            <li><a href="#">登录</a></li>
+        </ul>
+    </div>
+    <div class="small-nav" >
+        <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
+        <ul class="snav-ul" v-show="isShow">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+</div>
+<div class="center-bar">
+</div>
+<div class="webpage-footer">
+</div>
+</body>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/vue.js"></script>
+<script src="../static/js/global.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>
