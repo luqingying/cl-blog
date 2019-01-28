@@ -30,9 +30,10 @@ public class UserServiceTest {
     public void testInsert() {
         UserBo userBo = new UserBo();
         User user = new User();
-        user.setUserName("user1");
-        user.setUserPassword("password1");
-        user.setUserImageUrl("userImageUrl");
+        user.setUserName("chenchen");
+        user.setUserPassword("chenchen");
+        user.setUserEmail("chenchen@csayl.com");
+        user.setUserImageUrl("chenchen");
         userBo.setUser(user);
         try {
             userService.insertUser(userBo);

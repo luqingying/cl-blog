@@ -1,13 +1,21 @@
 package com.csayl.clblog.service;
 
 import com.csayl.clblog.exception.NoSuchBeanException;
+import com.csayl.clblog.exception.WrongFieldException;
 import com.csayl.clblog.model.bo.ArticleBo;
+import com.csayl.clblog.model.bo.CategoryBo;
+import com.csayl.clblog.model.domain.Article;
+import com.csayl.clblog.model.domain.ArticleContent;
+import com.csayl.clblog.model.domain.Category;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: chen
@@ -53,7 +61,21 @@ public class ArticleServiceTest {
 
     @Test
     public void testInsert() {
-
+        Article article = new Article();
+        article.setArticleUserId(3L);
+        article.setArticleName("Hhhh");
+        article.setArticleCoverUrl("Hhhh");
+        article.setArticleDescription("Hhhh");
+        article.setArticleIsTop(false);
+        ArticleContent content = new ArticleContent();
+        content.setContent("Hhhh");
+        List<CategoryBo> categories = new ArrayList<>();
+        categories.add(new CategoryBo(new Category(4L, null, null, null)));
+        try {
+            articleService.insertArticle(new ArticleBo(null, article, content, categories));
+        } catch (WrongFieldException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,12 +1,16 @@
 package com.csayl.clblog.model.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Category  implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category implements Serializable {
     private Long categoryId;
 
     private String categoryContent;

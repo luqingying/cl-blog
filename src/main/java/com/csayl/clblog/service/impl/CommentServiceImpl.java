@@ -152,11 +152,11 @@ public class CommentServiceImpl implements CommentService {
     private PageInfo<CommentBo> assembleCommentBo(List<Comment> comments) throws NoSuchBeanException {
         PageInfo<Comment> pageInfo = new PageInfo<>(comments);
         PageInfo<CommentBo> res = PageUtils.copyPageInfo(pageInfo);
-        List<Long> userIds = new ArrayList<>();
+        List<UserBo> userBos = new ArrayList<>();
+
         for (Comment comment : comments) {
-            userIds.add(comment.getPUserId());
+            userBos.add(userService.selectSimpleUserByUserId(comment.getPUserId()));
         }
-        List<UserBo> userBos = userService.selectSimpleUsersByUserIds(userIds);
 
         List<CommentBo> list = res.getList();
         CommentBo commentBo;

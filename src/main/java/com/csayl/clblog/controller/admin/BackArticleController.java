@@ -4,11 +4,14 @@ import com.csayl.clblog.dto.ResponseData;
 import com.csayl.clblog.exception.NoSuchBeanException;
 import com.csayl.clblog.exception.WrongFieldException;
 import com.csayl.clblog.model.bo.ArticleBo;
+import com.csayl.clblog.model.bo.UserBo;
 import com.csayl.clblog.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: chen
@@ -39,8 +42,11 @@ public class BackArticleController {
     }
 
     @PostMapping("/add")
-    public ResponseData<String> addArticle(ArticleBo articleBo) {
+    public ResponseData<String> addArticle(ArticleBo articleBo, HttpServletRequest request) {
         try {
+            //获得作者
+            UserBo info = (UserBo) request.getSession().getAttribute("info");
+            articleBo.getArticle().setArticleUserId(info.getUser().getUserId());
             articleService.insertArticle(articleBo);
         } catch (WrongFieldException e) {
             LOGGER.debug("添加文章", e);

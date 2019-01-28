@@ -4,7 +4,9 @@ import com.csayl.clblog.model.domain.Article;
 import com.csayl.clblog.model.domain.ArticleContent;
 import com.csayl.clblog.model.domain.Category;
 import com.csayl.clblog.model.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  * @date: 2019/1/16
  **/
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleBo implements Serializable {
 
     //文章作者

@@ -67,10 +67,11 @@ public class ArticleServiceImpl implements ArticleService {
         }
         try {
             Article article = articleBo.getArticle();
-            List<CategoryBo> categories = articleBo.getCategories();
             ArticleContent content = articleBo.getContent();
+            List<CategoryBo> categories = articleBo.getCategories();
 
             articleMapper.insertSelective(article);
+            content.setPArticleId(article.getArticleId());
             contentMapper.insertSelective(content);
 
             //将该文章涉及的所有类别都插入
@@ -98,8 +99,8 @@ public class ArticleServiceImpl implements ArticleService {
             ArticleCategoryExample articleCategoryExample = new ArticleCategoryExample();
             articleCategoryExample.createCriteria().andPArticleIdEqualTo(article.getArticleId());
             articleCategoryMapper.deleteByExample(articleCategoryExample);
-            insertCategoriesByArticleId(article.getArticleId(), categories);
 
+            insertCategoriesByArticleId(article.getArticleId(), categories);
         } catch (Exception e) {
             LOGGER.error("插入文章：" + articleBo + " 出错，原因：", e);
             throw new WrongFieldException("文章不符合规范，请重新输入");
@@ -185,7 +186,7 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(pageNum, pageSize);
         //查询文章
         ArticleExample articleExample = new ArticleExample();
-        articleExample.setOrderByClause((top ? "is_top desc ," : "") +
+        articleExample.setOrderByClause((top ? "article_is_top desc ," : "") +
                 orderBy.getField());
         ArticleExample.Criteria criteria = articleExample.createCriteria();
         criteria.andArticleIsDeletedEqualTo(false);
@@ -281,11 +282,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private List<UserBo> getUsersOfArticles(List<Article> articles) throws NoSuchBeanException {
-        List<Long> userIds = new ArrayList<>();
+        List<UserBo> res = new ArrayList<>();
         for (Article article : articles) {
-            userIds.add(article.getArticleUserId());
+            res.add(userService.selectSimpleUserByUserId(article.getArticleUserId()));
         }
-        return userService.selectSimpleUsersByUserIds(userIds);
+        return res;
     }
 
     private List<Long> getArticleIdsOfCategory(Long categoryId) {
@@ -313,11 +314,7 @@ public class ArticleServiceImpl implements ArticleService {
         List<ArticleBo> articleBos = new ArrayList<>();
         ArticleBo articleBo;
         for (int i = 0; i < articles.size(); i++) {
-            articleBo = new ArticleBo();
-            articleBo.setCreator(userBos.get(i));
-            articleBo.setArticle(articles.get(i));
-            articleBo.setCategories(categories.get(i));
-            articleBos.add(articleBo);
+            articleBos.add(new ArticleBo(userBos.get(i), articles.get(i), null, categories.get(i)));
         }
         return articleBos;
     }
