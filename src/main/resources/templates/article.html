@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../static/css/share.min.css">
+<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/article.css" type="text/css"/>
+
+<!--<link rel="stylesheet" href="../static/css/mkd-style.css"/>-->
+<link rel="stylesheet" href="../static/css/editormd.preview.css"/>
+
+<style type="text/css">
+    .theLast, .theNext {
+        display: inline-block;
+        color: #666666;
+        position: absolute;
+        margin: 15px;
+    }
+
+    .main {
+        position: relative
+    }
+
+    .theLast {
+        left: 0;
+    }
+
+    .theNext {
+        right: 0;
+    }
+
+    .social-share {
+        position: absolute;
+        right: 0;
+        margin: 15px;
+    }
+
+    .write-comment, .comments {
+        padding: 15px;
+        width: 100%;
+        position: relative;
+        top: 70px;
+        background-color: white;
+    }
+
+    .comments {
+        top: 100px;
+    }
+
+    .comment-textarea {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .comment-title {
+        height: 1em;
+        line-height: 1em;
+        border-left: 3px solid #aaa;
+        padding-left: 5px;
+        color: #777;
+    }
+
+    #comment-submit {
+        padding: 10px 15px;
+        border: none;
+        background-color: #0077B5;
+        color: white;
+        margin-top: 5px;
+    }
+
+    .comment-bar {
+        line-height: 2em;
+        border-top: dashed #aaa 1px;
+        padding: 25px 0;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    .profile-picture {
+        border-radius: 3px;
+    }
+
+    .idname {
+        color: #0077B5;
+        padding: 15px;
+        position: absolute;
+        top: 10px;
+        left: 50px;
+    }
+
+    .comment-content {
+        color: #666;
+        position: relative;
+        display: block;
+        line-height: 1.5em;
+    }
+
+    .comment-content p {
+        text-align: justify;
+    }
+
+    .comment-bar time {
+        position: absolute;
+        right: 0;
+        top: 10px;
+        color: #666;
+    }
+
+    .reply-comment {
+        color: #999;
+    }
+
+    .reply-comment:hover {
+        color: #0077B5;
+    }
+
+    .comment-reply-bar .idname, .comment-reply-bar time {
+        top: 0;
+    }
+
+    .comment-reply-bar {
+        padding: 15px;
+        margin-left: 65px;
+        position: relative;
+        top: 15px;
+        border-left: 2px #bbb solid;
+    }
+
+    @media (max-width: 768px) {
+        .comment-content {
+            margin-top: -10px;
+        }
+
+        .idname {
+            padding: 10px 15px;
+            top: 15px;
+        }
+
+        .comment-bar time {
+            left: 50px;
+            top: 3em;
+            padding: 0 15px;
+        }
+
+        .comment-reply-bar .idname {
+            left: 55px;
+        }
+
+        .comment-reply-bar time {
+            top: 2em;
+            left: 55px;
+        }
+    }
+</style>
+<body>
+<div class="top-nav">
+    <div class="container top-nav-container">
+        <ul class="top-nav-ul">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+    <div class="small-nav">
+        <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
+        <ul class="snav-ul" v-show="isShow">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+</div>
+<div class="center-bar">
+    <div class="container">
+        <div class="articles-bar main">
+            <div class="article-content">
+                <h1 class="content-title">这是一个标题</h1>
+                <div class="title-spans">
+                    <span>2018-1-18</span>
+                    <span>陈辰</span>
+                    <span>3条评论</span>
+                    <span>111次浏览</span>
+                </div>
+
+
+                <div id="testEditorMdview">
+                    <textarea id="appendTest" style="display:none;" name="editormd-markdown-doc">
+
+                    </textarea>
+                </div>
+
+
+                <div class="article-tags">
+                    <span>#java</span>
+                </div>
+            </div>
+
+
+            <!--文章分享-->
+            <div class="social-share" data-initialized="true">
+                <a href="#" class="social-share-icon icon-qq"></a>
+                <a href="#" class="social-share-icon icon-wechat"></a>
+                <a href="#" class="social-share-icon icon-weibo"></a>
+                <a href="#" class="social-share-icon icon-qzone"></a>
+            </div>
+            <!--end of 文章分享-->
+
+            <!--评论区-->
+            <div>
+                <div class="write-comment">
+                    <h3 class="comment-title">发表评论</h3>
+                    <textarea class="comment-textarea" rows="5" placeholder="大佬，有啥想说的不？"></textarea>
+                    <button id="comment-submit">发表评论</button>
+                </div>
+                <div class="comments">
+                    <h3 class="comment-title">全部评论</h3>
+                    <div class="comment-bar">
+                        <img class="profile-picture" src="../static/img/headpic.jpeg">
+                        <div class="comment-others">
+                            <span class="idname">appbanche</span>
+                            <time>2019-1-26 16:54</time>
+                        </div>
+                        <p class="comment-content">陈猪猪是猪嘻嘻嘻陈猪猪陈猪猪是猪嘻嘻嘻陈猪猪陈猪猪是猪嘻嘻嘻陈猪猪陈猪猪陈猪猪陈猪猪陈猪猪陈猪猪</p>
+                        <a><span class="reply-comment">回复</span></a>
+                        <div class="comment-reply-bar">
+                            <img class="sm-profile-picture" src="../static/img/headpic.jpeg">
+                            <span class="idname">appbanche</span>
+                            <time>2019-1-26 16:54</time>
+                            <p class="comment-content">
+                                陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻</p>
+                            <a><span class="reply-comment">回复</span></a>
+                        </div>
+                        <div class="comment-reply-bar">
+                            <img class="sm-profile-picture" src="../static/img/headpic.jpeg">
+                            <span class="idname">appbanche</span>
+                            <time>2019-1-26 16:54</time>
+                            <p class="comment-content">陈嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻</p>
+                            <a><span class="reply-comment">回复</span></a>
+                        </div>
+                    </div>
+                    <div class="comment-bar">
+                        <img class="profile-picture" src="../static/img/headpic.jpeg">
+                        <span class="idname">appbanche</span>
+                        <time>2019-1-26 16:54</time>
+                        <p class="comment-content">陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻</p>
+                        <a><span class="reply-comment">回复</span></a>
+                        <div class="comment-reply-bar">
+                            <img class="sm-profile-picture" src="../static/img/headpic.jpeg">
+                            <span class="idname">appbanche</span>
+                            <time>2019-1-26 16:54</time>
+                            <p class="comment-content">陈猪猪是猪嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻</p>
+                            <a><span class="reply-comment">回复</span></a>
+                        </div>
+                        <div class="comment-reply-bar">
+                            <img class="sm-profile-picture" src="../static/img/headpic.jpeg">
+                            <span class="idname">appbanche</span>
+                            <time>2019-1-26 16:54</time>
+                            <p class="comment-content">陈猪猪是猪嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻陈猪猪是猪嘻嘻嘻</p>
+                            <a><span class="reply-comment">回复</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end of 评论区-->
+        </div>
+
+        <div class="right-sidebar sidebar">
+            这里要写一个文章导航
+        </div>
+    </div>
+</div>
+<div class="webpage-footer">
+</div>
+</body>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/vue.js"></script>
+<script src="../static/js/global.js"></script>
+<script src="../static/js/social-share.js"></script>
+<script src="../static/js/qrcode.js"></script>
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/marked.min.js"></script>
+<script src="../static/js/prettify.min.js"></script>
+<script src="../static/js/raphael.min.js"></script>
+<script src="../static/js/underscore.min.js"></script>
+<script src="../static/js/sequence-diagram.min.js"></script>
+<script src="../static/js/flowchart.min.js"></script>
+<script src="../static/js/jquery.flowchart.min.js"></script>
+<script src="../static/js/editormd.js"></script>
+<script type="text/javascript">
+    function mdToHml() {
+        console.log("begin");
+        var articleTop = '```1312321```';
+        $('#appendTest').text(articleTop);
+        console.log(articleTop);
+        console.log($('#appendTest').html() + "2");
+        var testEditorMdview;
+        testEditorMdview = editormd.markdownToHTML("testEditorMdview", {
+            htmlDecode: "true", // you can filter tags decode
+            emoji: true,
+            taskList: true,
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true
+        });
+    }
+
+    mdToHml();
+</script>
+</html>

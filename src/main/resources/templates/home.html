@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
+<link rel="stylesheet" href="../static/scss/home.css" type="text/css"/>
+<style type="text/css">
+
+</style>
+<body>
+<div class="top-nav">
+    <div class="container top-nav-container">
+        <ul class="top-nav-ul">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+            <li><a href="#">登录</a></li>
+        </ul>
+    </div>
+    <div class="small-nav">
+        <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
+        <ul class="snav-ul" v-show="isShow">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+        </ul>
+    </div>
+</div>
+<div class="center-bar">
+    <div class="container">
+        <div class="articles-bar main">
+            <div class="article">
+                <div id="app">
+                    {{ info }}
+                </div>
+            </div>
+            <div class="article">
+                <div class="article-cover-pic">
+                    <img src="../static/img/cover2.jpg">
+                </div>
+                <div class="article-brief">
+                    <h3 class="article-title">题目</h3>
+                    <div class="title-spans">
+                        <span>2018-1-18</span>
+                        <span>陈辰</span>
+                        <span>3条评论</span>
+                        <span>111次浏览</span>
+                    </div>
+                    <p class="content-brief"> 关于这个想法已经有了很长时间了，今天把这个flag插在这里，一点点实现这个计划。 对于WordPress，“重”对于我是太大的痛点。
+                        自己个性定制关于这个想法已经有了很长时间</p>
+                    <div class="article-tags">
+                        <span>#java</span>
+                    </div>
+                </div>
+            </div>
+            <div class="article">
+                <div class="article-cover-pic">
+                </div>
+                <div class="article-brief">
+                    <h3 class="article-title">题目</h3>
+                    <div class="title-spans">
+                        <span>2018-1-18</span>
+                        <span>陈辰</span>
+                        <span>3条评论</span>
+                        <span>111次浏览</span>
+                    </div>
+                    <p class="content-brief"> 关于这个想法已经有了很长时间了，今天把这个flag插在这里，一点点实现这个计划。 对于WordPress，“重”对于我是太大的痛点。
+                        自己个性定制关于这个想法已经有了很长时间了，今天把</p>
+                    <div class="article-tags">
+                        <span>#java</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="pagination">
+                <li>&laquo;</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>&raquo;</li>
+            </ul>
+        </div>
+        <div class="right-sidebar sidebar">
+            <div id="latest-articel" class="partOfsidebar">
+                <h2 class="sidebar-title">最新文章</h2>
+                <ul class="sidebar-ul">
+                    <li>这个想法已经这个想法已经这个想法已经</li>
+                    <li>这个想法已经</li>
+                    <li>这个想法已经</li>
+                    <li>这个想法已经</li>
+                </ul>
+            </div>
+            <div id="latest-archive" class="partOfsidebar">
+                <h2 class="sidebar-title">最新评论</h2>
+                <ul class="sidebar-ul">
+                    <li>卢猪猪是猪</li>
+                    <li>卢猪猪吃粑粑</li>
+                    <li>卢猪猪挨打</li>
+                    <li>卢猪猪是猪</li>
+                </ul>
+            </div>
+            <div id="article-class" class="partOfsidebar">
+                <h2 class="sidebar-title">文章分类</h2>
+                <ul class="sidebar-ul">
+                    <li>题目这个想法已经</li>
+                    <li>题目这个想法已经</li>
+                    <li>题目这个想法已经</li>
+                    <li>题目这个想法已经</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="webpage-footer">
+</div>
+</body>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/vue.js"></script>
+<script src="../static/js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data (){
+            return {
+                info: null
+            }
+        },
+        mounted () {
+            axios
+                .get('/article/all')
+                .then(response => (this.info = response))
+                .catch(function (error) {console.log(error);})
+        }
+    })
+
+    /* axios.get('/article/all')
+     .then(function (response) {
+     console.log(response);
+     })
+     .catch(function (error) {
+     console.log(error);
+     });*/
+
+</script>
+</html>

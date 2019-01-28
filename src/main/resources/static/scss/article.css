@@ -1,0 +1,28 @@
+.profile-picture {
+  width: 50px;
+  height: 50px; }
+
+.comment-content {
+  margin-top: -25px;
+  margin-bottom: 0;
+  margin-left: 65px; }
+
+.comment-bar time {
+  padding: 15px; }
+
+.reply-comment {
+  margin-left: 65px; }
+
+.sm-profile-picture {
+  width: 40px; }
+
+.comment-reply-bar .comment-content {
+  margin-left: 55px;
+  top: 15px; }
+
+.comment-reply-bar .reply-comment {
+  margin-left: 55px;
+  position: relative;
+  top: 15px; }
+
+/*# sourceMappingURL=article.css.map */
