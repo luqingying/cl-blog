@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>首页</title>
 </head>
-<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
-<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
-<link rel="stylesheet" href="../static/scss/home.css" type="text/css"/>
+<link rel="stylesheet" href="css/global.css" type="text/css"/>
+<link rel="stylesheet" href="scss/global.css" type="text/css"/>
+<link rel="stylesheet" href="scss/home.css" type="text/css"/>
 <style type="text/css">
 
 </style>
@@ -33,12 +33,11 @@
         </ul>
     </div>
 </div>
-<div class="center-bar">
+<div class="center-bar" id="article">
     <div class="container">
         <div class="articles-bar main">
             <div class="article">
-                <div id="app">
-                    {{ info }}
+                <div>
                 </div>
             </div>
             <div class="article">
@@ -46,17 +45,17 @@
                     <img src="../static/img/cover2.jpg">
                 </div>
                 <div class="article-brief">
-                    <h3 class="article-title">题目</h3>
+                    <h3 class="article-title">{{articleName}}</h3>
                     <div class="title-spans">
-                        <span>2018-1-18</span>
-                        <span>陈辰</span>
+                        <span>{{gmtCreate}}</span>
+                        <span>{{userName}}</span>
                         <span>3条评论</span>
                         <span>111次浏览</span>
                     </div>
                     <p class="content-brief"> 关于这个想法已经有了很长时间了，今天把这个flag插在这里，一点点实现这个计划。 对于WordPress，“重”对于我是太大的痛点。
                         自己个性定制关于这个想法已经有了很长时间</p>
                     <div class="article-tags">
-                        <span>#java</span>
+                        <span>#{{categories}}</span>
                     </div>
                 </div>
             </div>
@@ -122,34 +121,41 @@
 <div class="webpage-footer">
 </div>
 </body>
-<script src="../static/js/jquery-3.2.1.min.js"></script>
-<script src="../static/js/vue.js"></script>
-<script src="../static/js/global.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<!--suppress JSAnnotator -->
 <script type="text/javascript">
     new Vue({
-        el: '#app',
+        el: '#article',
         data (){
             return {
-                info: null
+                userName: null,
+                articleName: null,
+                gmtCreate: null,
+                categories: null
             }
         },
         mounted () {
             axios
                 .get('/article/all')
-                .then(response => (this.info = response))
-                .catch(function (error) {console.log(error);})
+                .then(function (response) {
+                    //if (response.statusCode === "SUCCESS")
+                    var list = response.data.list;
+                    this.userName = list[0].creator.userName;
+                    this.articleName = list[0].article.articleName;
+                    this.gmtCreate = list[0].article.gmtCreate;
+                    this.categories = list[0].categories[0].category.categoryContent;
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
         }
     })
-
-    /* axios.get('/article/all')
-     .then(function (response) {
-     console.log(response);
-     })
-     .catch(function (error) {
-     console.log(error);
-     });*/
 
 </script>
 </html>

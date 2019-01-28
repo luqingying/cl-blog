@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>分类</title>
+    <title>归档</title>
 </head>
-<link rel="stylesheet" href="../static/css/global.css" type="text/css"/>
-<link rel="stylesheet" href="../static/scss/global.css" type="text/css"/>
+<link rel="stylesheet" href="css/global.css" type="text/css"/>
+<link rel="stylesheet" href="scss/global.css" type="text/css"/>
 <style type="text/css">
 
     @media (max-width: 768px) {
-        .selectClass{
+        .archive-select{
             display: inline;
         }
     }
 
     @media (min-width: 768px) {
-        .selectClass{
+        .archive-select{
             display: inline;
         }
     }
     @media (min-width: 992px) {
-        .selectClass{
+        .archive-select{
             display: none;
         }
     }
     @media (min-width: 1200px) {
-        .selectClass{
+        .archive-select{
             display: none;
         }
     }
 </style>
 <body>
-    <div class="top-nav">
+<div class="top-nav">
     <div class="container top-nav-container">
         <ul class="top-nav-ul">
             <li><a href="home.html">首页</a></li>
@@ -55,17 +55,30 @@
     <div class="center-bar">
         <div class="container">
             <div class="articles-bar main">
-                <div class="selectClass">
-                    <select id="classSelect" class="topSelectBar">
-                        <option value="java">Java</option>
-                        <option value="html">Html</option>
-                        <option value="css">CSS</option>
-                        <option value="js">JavaScript</option>
+                <div class="archive-select">
+                    <select id="archive-year" class="topSelectBar">
+                        <option value="2019">2019年</option>
+                        <option value="2018">2018年</option>
+                    </select>
+                    <select id="archive-month" class="topSelectBar">
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="2">3月</option>
+                        <option value="2">4月</option>
+                        <option value="2">5月</option>
+                        <option value="2">6月</option>
+                        <option value="2">7月</option>
+                        <option value="2">8月</option>
+                        <option value="2">9月</option>
+                        <option value="2">10月</option>
+                        <option value="2">11月</option>
+                        <option value="2">12月</option>
                     </select>
                 </div>
+
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <h3 class="article-title">NodeJS版本升级到最新版0</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -74,7 +87,7 @@
                 </div>
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <h3 class="article-title">Angular JS跨域无法post解决方案1</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -83,7 +96,7 @@
                 </div>
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <h3 class="article-title">NodeJS版本升级到最新版2</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -92,7 +105,7 @@
                 </div>
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <h3 class="article-title">Angular JS跨域无法post解决方案3</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -101,7 +114,7 @@
                 </div>
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">NodeJS版本升级到最新版</h3>
+                        <h3 class="article-title">NodeJS版本升级到最新版4</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -110,7 +123,7 @@
                 </div>
                 <div class="article">
                     <div class="article-brief">
-                        <h3 class="article-title">Angular JS跨域无法post解决方案</h3>
+                        <h3 class="article-title">Angular JS跨域无法post解决方案5</h3>
                         <div class="title-spans">
                             <span>2018-1-18</span>
                             <span>陈辰</span>
@@ -127,14 +140,17 @@
                     <li>&raquo;</li>
                 </ul>
             </div>
-            <div class="right-sidebar sidebar">
+            <div class="right-sidebar sidebar ">
                 <div id="latest-articel" class="partOfsidebar">
-                    <h2 class="sidebar-title">分类目录</h2>
+                    <h2 class="sidebar-title">归档目录</h2>
                     <ul class="sidebar-ul">
-                        <li>Java</li>
-                        <li>spring</li>
-                        <li>HTML</li>
-                        <li>css</li>
+                        <li>2019年01月</li>
+                        <li>2018年12月</li>
+                        <li>2018年11月</li>
+                        <li>2018年10月</li>
+                        <li>2018年09月</li>
+                        <li>2018年08月</li>
+                        <li>2018年07月</li>
                     </ul>
                 </div>
             </div>
@@ -143,9 +159,9 @@
     <div class="webpage-footer">
     </div>
 </body>
-<script src="../static/js/jquery-3.2.1.min.js"></script>
-<script src="../static/js/vue.js"></script>
-<script src="../static/js/global.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
 <script type="text/javascript">
 
 </script>
