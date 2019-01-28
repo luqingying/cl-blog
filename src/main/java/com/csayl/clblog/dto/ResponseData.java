@@ -20,38 +20,38 @@ public class ResponseData<T> {
     private String msg;
 
     //返回数据
-    private T data;
+    private T resource;
 
 
     public static <T> ResponseData<T> succeed() {
         return succeed(null);
     }
 
-    public static <T> ResponseData<T> succeed(T data) {
-        return succeed("操作成功", data);
+    public static <T> ResponseData<T> succeed(T resource) {
+        return succeed("操作成功", resource);
     }
 
     public static <T> ResponseData<T> succeed(String msg) {
         return succeed(msg, null);
     }
 
-    public static <T> ResponseData<T> succeed(String msg, T data) {
-        return new ResponseData<>(StatusCode.SUCCESS, msg, data);
+    public static <T> ResponseData<T> succeed(String msg, T resource) {
+        return new ResponseData<>(StatusCode.SUCCESS, msg, resource);
     }
 
     public static <T> ResponseData<T> fail() {
         return fail(null);
     }
 
-    public static <T> ResponseData<T> fail(T data) {
-        return fail("操作失败", data);
+    public static <T> ResponseData<T> fail(T resource) {
+        return fail("操作失败", resource);
     }
 
     public static <T> ResponseData<T> fail(String msg) {
         return fail(msg, null);
     }
 
-    public static <T> ResponseData<T> fail(String msg, T data) {
-        return new ResponseData<>(StatusCode.FAILURE, msg, data);
+    public static <T> ResponseData<T> fail(String msg, T resource) {
+        return new ResponseData<>(StatusCode.FAILURE, msg, resource);
     }
 }
