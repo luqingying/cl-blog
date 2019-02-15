@@ -103,8 +103,7 @@ public class CommentServiceImpl implements CommentService {
     @Cacheable("comment")
     @Override
     public PageInfo<CommentBo> selectLatestComments(Integer commentNum) throws WrongFieldException, NoSuchBeanException {
-        if (commentNum <= CommentConfiguration.MinCommentNum /*|| commentNum >= CommentConfiguration.MaxCommentNum*/) {
-            System.out.println(CommentConfiguration.MinCommentNum);
+        if (commentNum <= CommentConfiguration.MinCommentNum || commentNum >= CommentConfiguration.MaxCommentNum) {
             throw new WrongFieldException("请输入正确的评论数量");
         }
         return selectComments(null, null, null, OrderBy.CREATE_TIME_DESC, 1, commentNum);
@@ -158,11 +157,9 @@ public class CommentServiceImpl implements CommentService {
             userBos.add(userService.selectSimpleUserByUserId(comment.getPUserId()));
         }
 
-        List<CommentBo> list = res.getList();
-        CommentBo commentBo;
+        List<CommentBo> list = new ArrayList<>();
         for (int i = 0; i < comments.size(); i++) {
-            commentBo = new CommentBo(comments.get(i), userBos.get(i));
-            list.add(commentBo);
+            list.add(new CommentBo(comments.get(i), userBos.get(i)));
         }
         res.setList(list);
         return res;
