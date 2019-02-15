@@ -180,25 +180,23 @@
 <div class="center-bar">
     <div class="container">
         <div class="articles-bar main">
-            <div class="article-content">
-                <h1 class="content-title">这是一个标题</h1>
+            <div class="article-content" id="article-content">
+                <h1 class="content-title">{{articleName}}</h1>
                 <div class="title-spans">
-                    <span>2018-1-18</span>
-                    <span>陈辰</span>
-                    <span>3条评论</span>
-                    <span>111次浏览</span>
+                    <span>{{gmtCreate}}</span>
+                    <span>{{userName}}</span>
+                    <span>{{readNum}}次浏览</span>
                 </div>
-
 
                 <div id="testEditorMdview">
                     <textarea id="appendTest" style="display:none;" name="editormd-markdown-doc">
-
+                        {{content}}
                     </textarea>
                 </div>
 
 
                 <div class="article-tags">
-                    <span>#java</span>
+                    <span v-for="tag in tags">{{tag}}</span>
                 </div>
             </div>
 
@@ -295,12 +293,48 @@
 <script src="js/jquery.flowchart.min.js"></script>
 <script src="js/editormd.js"></script>
 <script type="text/javascript">
-    function mdToHml() {
-        console.log("begin");
-        var articleTop = '```1312321```';
-        $('#appendTest').text(articleTop);
-        console.log(articleTop);
-        console.log($('#appendTest').html() + "2");
+    new Vue({
+        el: '#article-content',
+        data() {
+            return {
+          /*      resource:null,*/
+                articleName:"Hhhh",
+                gmtCreate:"2019-01-28T20:17:39.000+0000",
+                userName:"chenchen",
+                readNum:0,
+                content:"```1312321```",
+                tags:["Html","Java"]
+            }
+        }/*,
+        mounted() {
+            axios.get('')
+                .then(response => {
+                this.resource = response.data.resource;
+                this.articleName = resource.article.articleName;
+                this.gmtCreate = resource.article.gmtCreate;
+                this.userName = resource.creator.user.userName;
+                this.readNum = resource.article.articleReading;
+                this.content = resource.content.content;
+                this.tags = resource.categories.category;
+            /!*this.articleName = response.data.resource.list[0].article.articleName;
+             this.gmtCreate = response.data.resource.list[0].article.gmtCreate;
+             this.categories = response.data.resource.list[0].categories[0].category.categoryContent;*!/
+        })
+        .catch(function (error) {
+                console.log(error);
+            });
+        }*/
+    });
+
+
+
+
+
+    function mdToHml() { 
+        /*   var articleTop = '```1312321```';
+            $('#appendTest').text(articleTop);
+       console.log(articleTop);
+        console.log($('#appendTest').html() + "2");*/
         var testEditorMdview;
         testEditorMdview = editormd.markdownToHTML("testEditorMdview", {
             htmlDecode: "true", // you can filter tags decode
@@ -311,7 +345,9 @@
             sequenceDiagram: true
         });
     }
-
     mdToHml();
+
+
+
 </script>
 </html>

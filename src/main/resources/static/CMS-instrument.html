@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台管理-仪表盘</title>
+</head>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+<style type="text/css">
+    a {
+        color: inherit;
+    }
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .right-navbar {
+        position: fixed;
+        height: 100%;
+        padding: 0;
+    }
+
+    .right-navbar ul {
+        position: relative;
+        top: 60px;
+    }
+
+    .right-navbar li {
+        display: block;
+    }
+
+    .right-navbar li a {
+        padding-left: 30px;
+        color: #777;
+    }
+
+    .right-navbar li a:hover {
+        color: #337ab7;
+    }
+
+    .right-navbar .active a {
+        background-color: #8897a6;
+        color: white;
+    }
+
+    .right-navbar .active a:hover {
+        background-color: #8897a6;
+        color: white;
+    }
+
+    .main {
+        position: relative;
+        top: 80px;
+    }
+
+    .instruments-board {
+        height: 100px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    #articleIB {
+        background-color: #c7a2a2;
+    }
+
+    #messageIB {
+        background-color: #ac9db7;
+    }
+
+    #logIB {
+        background-color: #96a48b;
+    }
+
+    .IB-ico {
+        position: relative;
+        top: 15px;
+        left: 15px;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .IB-ico img {
+        position: relative;
+        top: 8px;
+        left: 9px;
+    }
+
+    .IB-inf0 span {
+        color: white;
+        display: block;
+        position: absolute;
+        right: 30px;
+    }
+
+    .IB-inf0 :nth-child(1) {
+        top: 10px;
+    }
+
+    .IB-inf0 :nth-child(2) {
+        top: 30px;
+    }
+
+    .IB-inf0 :nth-child(3) {
+        top: 70px;
+    }
+
+    .info-num {
+        font-size: 32px;
+    }
+
+    #instrumentsBoard，#latest {
+        display: block;
+    }
+
+    .idname {
+        color: #337ab7;
+        padding-right: 10px;
+    }
+
+    .time {
+        color: #999;
+    }
+
+    .latest-log .time {
+        padding-right: 10px;
+    }
+
+    .comment {
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+
+
+</style>
+<body>
+<div class="container-fluid navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            logo
+        </a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown visible-xs">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    博客管理<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="active"><a href="#">仪表盘</a></li>
+                    <li><a href="#">文章</a></li>
+                    <li><a href="#">评论</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="#">分类</a></li>
+                    <li><a href="#">用户</a></li>
+                    <li><a href="#">友链</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </li>
+            <li><a href="#">个人信息</a></li>
+            <li><a href="#">退出登录</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
+    <ul class="nav">
+        <li class="active"><a href="#">仪表盘</a></li>
+        <li><a href="#">文章</a></li>
+        <li><a href="#">评论</a></li>
+        <li><a href="#">日志</a></li>
+        <li><a href="#">分类</a></li>
+        <li><a href="#">用户</a></li>
+        <li><a href="#">友链</a></li>
+    </ul>
+</div>
+<div class="container col-md-10 col-sm-9 col-xs-12 pull-right main">
+    <div id="instrumentsBoard">
+        <h2>仪表盘</h2>
+        <div class="col-md-4 col-xs-12 ">
+            <div id="articleIB" class="instruments-board">
+                <a href="#">
+                    <div class="IB-ico">
+                        <img src="img/article.png">
+                    </div>
+                    <div class="IB-inf0">
+                        <span class="info-text">发表了</span>
+                        <span class="info-num">100</span>
+                        <span class="info-text">篇文章</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12 ">
+            <div id="messageIB" class="instruments-board">
+                <a href="#">
+                    <div class="IB-ico">
+                        <img src="img/comment.png">
+                    </div>
+                    <div class="IB-inf0">
+                        <span class="info-text">收到了</span>
+                        <span class="info-num">100</span>
+                        <span class="info-text">条评论</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12 ">
+            <div id="logIB" class="instruments-board">
+                <a href="#">
+                    <div class="IB-ico">
+                        <img src="img/log.png">
+                    </div>
+                    <div class="IB-inf0">
+                        <span class="info-text">访问了</span>
+                        <span class="info-num">100</span>
+                        <span class="info-text">次</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="latest">
+        <div class="col-md-4 col-xs-12 ">
+            <h3>最新文章</h3>
+            <ul class="list-group latest-article">
+                <li class="list-group-item">
+                    <span class="badge">0</span>文章题目
+                </li>
+                <li class="list-group-item ">
+                    <span class="badge">0</span>文章题目
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">0</span>文章题目
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">0</span>文章题目
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">0</span>文章题目
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 col-xs-12 ">
+            <h3>最新评论</h3>
+            <ul class="list-group latest-comment">
+                <li class="list-group-item">
+                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
+                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
+                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
+                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
+                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-md-4 col-xs-12 ">
+            <h3>最新日志</h3>
+            <ul class="list-group latest-log">
+                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+                </li>
+                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+                </li>
+                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+                </li>
+                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+                </li>
+                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</html>
