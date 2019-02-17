@@ -6,6 +6,61 @@
 </head>
 <link rel="stylesheet" href="css/global.css" type="text/css"/>
 <link rel="stylesheet" href="scss/global.css" type="text/css"/>
+<style type="text/css">
+
+    #nameAndPic{
+        width: 100%;
+        margin: auto;
+        padding-top: 40px;
+        padding-bottom: 72px;
+        text-align: center;
+        background-color:#3d3d3f;
+    }
+
+    .personal-headpic{
+        width:140px;
+        height: 140px;
+        border:5px white solid;
+        border-radius: 10px;
+    }
+    /*.container{
+        background-color: white;
+    }*/
+
+    #idname-nav{
+        height: 30px;
+        width: 140px;
+        left: 0;
+        right: 0;
+        margin:10px auto;
+        position: absolute;
+        padding: 0;
+    }
+    .id-name{
+        display: inline-block;
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+        position: relative;
+        top:-3px;
+        margin-right: 10px;
+    }
+    .edit-ico{
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url("img/edit-white.png");
+        background-size: 100%;
+    }
+
+    #personal-information{
+        width: 100%;
+        margin: auto;
+        height: 500px;
+        background-color: white;
+        border: 1px solid #ddd;
+    }
+</style>
 <body>
 <div class="top-nav">
     <div class="container top-nav-container">
@@ -40,7 +95,17 @@
 </div>
 <div class="center-bar">
     <div class="container">
+        <div id="nameAndPic">
+            <img class="personal-headpic" src="img/bear.jpeg">
+            <div><a href="#" class="edit-head-pic"></a></div>
+            <div id="idname-nav"><span class="id-name">陈辰</span><span class="edit-ico"></span></div>
+        </div>
+        <div id="personal-information">
+            <div class="main-information">
 
+            </div>
+            <div class="right-sidebar"></div>
+        </div>
     </div>
 </div>
 <div class="webpage-footer">
