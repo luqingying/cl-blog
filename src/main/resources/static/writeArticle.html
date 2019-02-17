@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>写文章</title>
+</head>
+<link rel="stylesheet" href="css/editormd.css"/>
+<link type="text/css" rel="stylesheet" href="js/lib/codemirror/codemirror.min.css">
+<link type="text/css" rel="stylesheet" href="js/lib/codemirror/addon/dialog/dialog.css">
+<link type="text/css" rel="stylesheet" href="js/lib/codemirror/addon/search/matchesonscrollbar.css">
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+<style type="text/css">
+    .top {
+        width: 90%;
+        padding: 20px 0;
+    }
+
+    .top-title {
+        display: table;
+        width: 100%;
+    }
+
+    .title-input-div {
+        padding-left: 0;
+        padding-right: 20px;
+        display: table-cell;
+    }
+
+    .top-buttons {
+        width: 185px;
+        display: table-cell;
+    }
+
+    .publish, .return {
+        width: 90px;
+    }
+    .summary{
+        margin-top: 20px;
+    }
+</style>
+<body>
+<div class="container top">
+    <form class="form-horizontal " role="form">
+        <div class="top-title">
+            <div class="title-input-div">
+                <input type="text" class="form-control" id="artcleName" placeholder="请输入文章题目">
+            </div>
+            <div class="top-buttons">
+                <button type="button" class="btn btn-primary publish">发布文章</button>
+                <button type="button" class="btn btn-default return">返回</button>
+            </div>
+        </div>
+        <textarea class="form-control summary" rows="3" placeholder="请输入文章摘要"></textarea>
+    </form>
+</div>
+<div id="layout" class="editor">
+    <div id="test-editormd">
+        <textarea style="display:none;" name="editormd-markdown-doc"></textarea>
+    </div>
+</div>
+
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/lib/marked.min.js"></script>
+<script src="js/lib/prettify.min.js"></script>
+<script src="js/lib/raphael.min.js"></script>
+<script src="js/lib/underscore.min.js"></script>
+<script src="js/lib/sequence-diagram.min.js"></script>
+<script src="js/lib/flowchart.min.js"></script>
+<script src="js/editormd.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    testEditor = editormd("test-editormd", {
+        placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
+        width: "90%",
+        height: 640,
+        syncScrolling: "single",
+        path: "js/lib/",   //你的path路径（原资源文件中lib包在我们项目中所放的位置）
+        theme: "default",//工具栏主题
+        previewTheme: "default",//预览主题
+        editorTheme: "default",//编辑主题
+        saveHTMLToTextarea: true,
+        emoji: true,
+        taskList: true,
+        tocm: true,         // Using [TOCM]
+        tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+        flowChart: true,             // 开启流程图支持，默认关闭
+        sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+        toolbarIcons: function () {  //自定义工具栏，后面有详细介绍
+            return editormd.toolbarModes['full']; // full, simple, mini
+        }
+    });
+</script>
+</html>

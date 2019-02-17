@@ -50,10 +50,24 @@
         background-color: #8897a6;
         color: white;
     }
-
+    .nav-head{
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+        overflow: hidden;
+    }
     .main {
         position: relative;
         top: 80px;
+    }
+    #writeBlog{
+        margin-left: 20px;
+    }
+    #writeBlog:hover{
+        text-decoration: underline;
+    }
+    #writeBlog img{
+        height: 14px;
     }
 </style>
 <body>
@@ -77,19 +91,26 @@
                     博客管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">仪表盘</a></li>
-                    <li class="active"><a href="#">文章</a></li>
-                    <li><a href="#">评论</a></li>
-                    <li><a href="#">日志</a></li>
-                    <li><a href="#">分类</a></li>
-                    <li><a href="#">用户</a></li>
-                    <li><a href="#">友链</a></li>
-                    <li class="divider"></li>
+                    <li><a href="CMS-instrument.html">仪表盘</a></li>
+                    <li class="active"><a href="CMS-article.html">文章</a></li>
+                    <li><a href="CMS-comment.html">评论</a></li>
+                    <li><a href="CMS-log.html">日志</a></li>
+                    <li><a href="CMS-category.html">分类</a></li>
+                    <li><a href="CMS-user.html">用户</a></li>
+                    <li><a href="CMS-link.html">友链</a></li>
                 </ul>
             </li>
-            <li><a href="#">添加文章</a></li>
-            <li><a href="#">个人信息</a></li>
-            <li><a href="#">退出登录</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img class="nav-head" src="img/bear.jpeg">
+                    admin<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">个人信息</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+
 
         </ul>
     </div>
@@ -97,23 +118,24 @@
 </div>
 <div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
     <ul class="nav">
-        <li><a href="#">仪表盘</a></li>
-        <li class="active"><a href="#">文章</a></li>
-        <li><a href="#">评论</a></li>
-        <li><a href="#">日志</a></li>
-        <li><a href="#">分类</a></li>
-        <li><a href="#">用户</a></li>
-        <li><a href="#">友链</a></li>
+        <li><a href="CMS-instrument.html">仪表盘</a></li>
+        <li class="active"><a href="CMS-article.html">文章</a></li>
+        <li><a href="CMS-comment.html">评论</a></li>
+        <li><a href="CMS-log.html">日志</a></li>
+        <li><a href="CMS-category.html">分类</a></li>
+        <li><a href="CMS-user.html">用户</a></li>
+        <li><a href="CMS-link.html">友链</a></li>
     </ul>
 </div>
 <div class="container col-md-10 col-sm-9 col-xs-12 pull-right main">
-    <h2>文章管理</h2>
+    <h2>文章管理<small class="pull-right"><a href="#" id="writeBlog"><img  src="img/write.png">写文章</a></small></h2>
     <table class="table table-striped table-hover table-responsive col-md-12">
         <thead>
             <tr>
                 <th>标题</th>
                 <th>作者</th>
-                <th>时间</th>
+                <th>创建时间</th>
+                <th>修改时间</th>
                 <th>分类</th>
                 <th>操作</th>
             </tr>
@@ -123,13 +145,6 @@
             <td><a href="#">这是一个标题</a></td>
             <td><a href="#">陈猪猪</a></td>
             <td>2019-2-15 16:38</td>
-            <td><a href="#">java</a></td>
-            <td><button type="button" class="btn btn-primary">编辑</button>
-                <button type="button" class="btn btn-danger">删除</button></td>
-        </tr>
-        <tr>
-            <td><a href="#">这是一个标题</a></td>
-            <td><a href="#">陈猪猪</a></td>
             <td>2019-2-15 16:38</td>
             <td><a href="#">java</a></td>
             <td><button type="button" class="btn btn-primary">编辑</button>
@@ -139,13 +154,14 @@
             <td><a href="#">这是一个标题</a></td>
             <td><a href="#">陈猪猪</a></td>
             <td>2019-2-15 16:38</td>
+            <td>2019-2-15 16:38</td>
             <td><a href="#">java</a></td>
             <td><button type="button" class="btn btn-primary">编辑</button>
                 <button type="button" class="btn btn-danger">删除</button></td>
-        </tr>
-        <tr>
+        </tr> <tr>
             <td><a href="#">这是一个标题</a></td>
             <td><a href="#">陈猪猪</a></td>
+            <td>2019-2-15 16:38</td>
             <td>2019-2-15 16:38</td>
             <td><a href="#">java</a></td>
             <td><button type="button" class="btn btn-primary">编辑</button>
@@ -155,17 +171,12 @@
             <td><a href="#">这是一个标题</a></td>
             <td><a href="#">陈猪猪</a></td>
             <td>2019-2-15 16:38</td>
-            <td><a href="#">java</a></td>
-            <td><button type="button" class="btn btn-primary">编辑</button>
-                <button type="button" class="btn btn-danger">删除</button></td>
-        </tr>
-        <tr>
-            <td><a href="#">这是一个标题</a></td>
-            <td><a href="#">陈猪猪</a></td>
             <td>2019-2-15 16:38</td>
             <td><a href="#">java</a></td>
-            <td><button type="button" class="btn btn-primary">编辑</button>
-                <button type="button" class="btn btn-danger">删除</button></td>
+            <td>
+                <button type="button" class="btn btn-primary">编辑</button>
+                <button type="button" class="btn btn-danger">删除</button>
+            </td>
         </tr>
 
         </tbody>

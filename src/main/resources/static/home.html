@@ -19,7 +19,15 @@
             <li><a href="archive.html">归档</a></li>
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
-            <li><a href="#">登录</a></li>
+            <!--        <li><a href="#">登录</a></li>-->
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow" >
+                    <li><a href="#">个人中心</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+
+
         </ul>
     </div>
     <div class="small-nav">
@@ -30,11 +38,14 @@
             <li><a href="archive.html">归档</a></li>
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
+            <li><img class="nav-head" src="img/bear.jpeg">陈辰<span class="pull-down-ico"></span></li>
+            <li><a href="#">个人中心</a></li>
+            <li><a href="#">退出登录</a></li>
         </ul>
     </div>
 </div>
-<div class="center-bar" >
-    <div>{{info}}</div>
+<div class="center-bar">
+    <div></div>
     <div class="container">
         <div class="articles-bar main" id="article">
             <div class="article">
@@ -135,35 +146,48 @@
         },
         mounted() {
             axios.get('/article/all')
-                .then(response => {
+                  .then(response = > {
                 this.dataList = response.data.resource.list;
             /*this.articleName = response.data.resource.list[0].article.articleName;
              this.gmtCreate = response.data.resource.list[0].article.gmtCreate;
              this.categories = response.data.resource.list[0].categories[0].category.categoryContent;*/
-        })
-        .catch(function (error) {
-                console.log(error);
-            });
+                })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
         }
     });
 
     new Vue({
-        el: '#latest-comment',
-        data() {
-            return {
-                list:["暂无评论"]
+            el: '#latest-comment',
+            data() {
+                return {
+                    list: ["暂无评论"]
+                }
+            },
+            mounted() {
+                axios.get('/comment/latest')
+                    .then(response = > {
+                    this.list = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
             }
-        },
-        mounted() {
-            axios
-                .get('/comment/latest')
-                .then(response => {
-                this.list = response.data.resource.list;
-                })
-                .catch(function (error) {
-                console.log(error);
-                });
-        }}
+        }
     )
+
+    new Vue({
+        el:'.pull-down',
+        data:{
+            isHide:true
+        },
+        methods:{
+            onClick:function (isHide) {
+                isHide = !isHide;
+                return isHide;
+            }
+        }
+    })
 
 </script>

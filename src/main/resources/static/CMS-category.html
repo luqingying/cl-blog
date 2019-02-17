@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台管理-分类管理</title>
+</head>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+<style type="text/css">
+    a {
+        color: inherit;
+    }
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .right-navbar {
+        position: fixed;
+        height: 100%;
+        padding: 0;
+    }
+
+    .right-navbar ul {
+        position: relative;
+        top: 60px;
+    }
+
+    .right-navbar li {
+        display: block;
+    }
+
+    .right-navbar li a {
+        padding-left: 30px;
+        color: #777;
+    }
+
+    .right-navbar li a:hover {
+        color: #337ab7;
+    }
+
+    .right-navbar .active a {
+        background-color: #8897a6;
+        color: white;
+    }
+
+    .right-navbar .active a:hover {
+        background-color: #8897a6;
+        color: white;
+    }
+
+    .nav-head {
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+        overflow: hidden;
+    }
+
+    .main {
+        position: relative;
+        top: 80px;
+    }
+
+    .tag-class {
+        margin: 10px 5px;
+    }
+
+    .tag-class {
+        border: none;
+        padding: 5px 10px;
+    }
+
+    .tag-class:nth-child( 6n ) {
+        background-color: #b5c1cf;
+    }
+
+    .tag-class:nth-child( 6n+1 ) {
+        background-color: #b5c3b1;
+    }
+
+    .tag-class:nth-child( 6n+2 ) {
+        background-color: #f9e9d4;
+    }
+
+    .tag-class:nth-child( 6n+3 ) {
+        background-color: #ead0d1;
+    }
+
+    .tag-class:nth-child( 6n+4 ) {
+        background-color: #cbabab;
+    }
+
+    .tag-class:nth-child( 6n+5 ) {
+        background-color: #c2b7ce;
+    }
+    h3 small{
+        margin-left: 10px;
+    }
+    .addTagico ,.deleteTagico,.editTagico{
+        height: 26px;
+    }
+</style>
+<body>
+<div class="container-fluid navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            logo
+        </a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown visible-xs">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    博客管理<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="CMS-instrument.html">仪表盘</a></li>
+                    <li><a href="CMS-article.html">文章</a></li>
+                    <li><a href="CMS-comment.html">评论</a></li>
+                    <li><a href="CMS-log.html">日志</a></li>
+                    <li class="active"><a href="CMS-category.html">分类</a></li>
+                    <li><a href="CMS-user.html">用户</a></li>
+                    <li><a href="CMS-link.html">友链</a></li>
+
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img class="nav-head" src="img/bear.jpeg">
+                    admin<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">个人信息</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+
+</div>
+<div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
+    <ul class="nav">
+        <li><a href="CMS-instrument.html">仪表盘</a></li>
+        <li><a href="CMS-article.html">文章</a></li>
+        <li><a href="CMS-comment.html">评论</a></li>
+        <li><a href="CMS-log.html">日志</a></li>
+        <li class="active"><a href="CMS-category.html">分类</a></li>
+        <li><a href="CMS-user.html">用户</a></li>
+        <li><a href="CMS-link.html">友链</a></li>
+    </ul>
+</div>
+<div class="container col-md-10 col-sm-9 col-xs-12 pull-right main">
+    <h2>分类管理
+        <small class="pull-right"><a href="#" data-toggle="modal" data-target="#addTagModal">
+            <img src="img/addtag.png" class="addTagico" >添加分类</a></small>
+    </h2>
+    <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" >添加分类</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="categoryName" class="col-sm-2 control-label">类名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="categoryName" placeholder="请输入类名">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">添加分类</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <button type="button" class="tag-class">Java</button>
+    <button type="button" class="tag-class">Jvm</button>
+    <button type="button" class="tag-class">JavaScript</button>
+    <button type="button" class="tag-class">CSS</button>
+    <button type="button" class="tag-class">HTML</button>
+    <button type="button" class="tag-class">Jvm</button>
+    <button type="button" class="tag-class">JavaScript</button>
+    <button type="button" class="tag-class">CSS</button>
+    <button type="button" class="tag-class">lalalalall</button>
+    <button type="button" class="tag-class">Jvm</button>
+    <button type="button" class="tag-class">JavaScript</button>
+    <button type="button" class="tag-class">CSS</button>
+    <button type="button" class="tag-class">HTML</button>
+    <button type="button" class="tag-class">Jvm</button>
+    <button type="button" class="tag-class">JavaScript</button>
+    <button type="button" class="tag-class">CSS</button>
+    <button type="button" class="tag-class">HTML</button>
+    <hr>
+    <h3>Java
+        <small>分类下的文章</small>
+
+        <small class="pull-right"><a href="#" data-toggle="modal" data-target="#deleteTagModal">
+            <img src="img/delete.png" class="deleteTagico" >删除该分类</a></small>
+        <small class="pull-right"><a href="#" data-toggle="modal" data-target="#editTagModal">
+            <img src="img/edit.png" class="editTagico" >编辑该分类</a></small>
+    </h3>
+    <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" >确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    陈猪猪你想好哦，是不是要删掉这个分类？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">算了，不删</button>
+                    <button type="button" class="btn btn-primary">我就是要删</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <div class="modal fade" id="editTagModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" >编辑分类</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="categoryName" class="col-sm-2 control-label">分类名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="category-input" placeholder="请输入类名" value="Java">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <table class="table table-striped table-hover table-responsive col-md-12">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>123</td>
+            <td><a href="#">这是一个标题</a></td>
+            <td><a href="#">陈猪猪</a></td>
+            <td>2019-2-15 16:38</td>
+            <td>
+                <button type="button" class="btn btn-danger">删除</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" >编辑友链</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="linkUrl" class="col-sm-2 control-label">友链URL</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="linkUrl" placeholder="请输入URL" value="www.baidu.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkDescription" class="col-sm-2 control-label">类名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="linkDescription" placeholder="请输入描述" value="百度">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <nav style="text-align: center">
+        <ul class="pagination">
+            <li class="disabled"><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </nav>
+
+</div>
+
+</div>
+
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</html>
