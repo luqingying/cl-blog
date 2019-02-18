@@ -1,6 +1,5 @@
 package com.csayl.clblog.dto;
 
-import com.csayl.clblog.constant.StatusCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseData<T> {
+    private enum StatusCode {
+        SUCCESS, FAILURE, NO_PERMISSION
+    }
+
     //状态码
     private StatusCode statusCode;
 
