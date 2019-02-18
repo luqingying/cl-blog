@@ -175,7 +175,10 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow">
+                <img class="nav-head" src="img/bear.jpeg">
+                <a href="#">陈辰</a>
+                <span class="pull-down-ico"></span>
                 <ul class="nav-pulldown" v-show="isShow" >
                     <li><a href="#">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
@@ -236,11 +239,11 @@
             <form>
                 <div class="row">
                     <label>新密码</label>
-                    <input type="password" placeholder="请输入新的密码"  >
+                    <input type="password" placeholder="请输入新的密码"  autocomplete='new-password'>
                 </div>
                 <div class="row">
                     <label>确认密码</label>
-                    <input type="password" placeholder="请确认密码"  >
+                    <input type="password" placeholder="请确认密码" autocomplete='new-password' >
                 </div>
             </form>
         </div>
@@ -279,6 +282,19 @@
 <script src="js/global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+    new Vue({
+        el: '.personal-leftNav',
+        methods:{
+            mounted () {
+                window.addEventListener('scroll', this.handleScroll);
+            },
+            handleScroll () {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                console.log(scrollTop);
+            }
+        }
+    });
+
     new Vue({
         el: '#nameAndPic',
         data: {

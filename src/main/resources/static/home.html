@@ -146,12 +146,12 @@
         },
         mounted() {
             axios.get('/article/all')
-                  .then(response = > {
-                this.dataList = response.data.resource.list;
+                  .then(response => {
+                    this.dataList = response.data.resource.list;
+                  })
             /*this.articleName = response.data.resource.list[0].article.articleName;
              this.gmtCreate = response.data.resource.list[0].article.gmtCreate;
              this.categories = response.data.resource.list[0].categories[0].category.categoryContent;*/
-                })
                   .catch(function (error) {
                     console.log(error);
                   });
@@ -167,7 +167,7 @@
             },
             mounted() {
                 axios.get('/comment/latest')
-                    .then(response = > {
+                    .then(response => {
                     this.list = response.data.resource.list;
                     })
                     .catch(function (error) {
