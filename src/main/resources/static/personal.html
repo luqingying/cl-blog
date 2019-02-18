@@ -6,6 +6,7 @@
 </head>
 <link rel="stylesheet" href="css/global.css" type="text/css"/>
 <link rel="stylesheet" href="scss/global.css" type="text/css"/>
+<link rel="stylesheet" href="scss/personal.css" type="text/css"/>
 <style type="text/css">
 
     #nameAndPic{
@@ -17,49 +18,152 @@
         background-color:#3d3d3f;
     }
 
-    .personal-headpic{
-        width:140px;
-        height: 140px;
+    .personal-headpic,.edit-head-pic{
         border:5px white solid;
-        border-radius: 10px;
     }
     /*.container{
         background-color: white;
     }*/
 
-    #idname-nav{
+/*    #idname-nav{
         height: 30px;
-        width: 140px;
+
+        padding: 0;
+    }*/
+    .id-name{
+        display:block;
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
         left: 0;
         right: 0;
         margin:10px auto;
         position: absolute;
-        padding: 0;
     }
-    .id-name{
-        display: inline-block;
-        font-size: 24px;
-        color: white;
-        font-weight: bold;
-        position: relative;
-        top:-3px;
-        margin-right: 10px;
-    }
-    .edit-ico{
+   /* .edit-ico{
         display: inline-block;
         width: 24px;
         height: 24px;
         background: url("img/edit-white.png");
         background-size: 100%;
-    }
+    }*/
 
     #personal-information{
         width: 100%;
         margin: auto;
-        height: 500px;
+        padding-top: 20px;
+    }
+    .edit-head-pic{
+        background: rgba(0,0,0,0.5);
+        position: absolute;
+        z-index: 10;
+        margin: auto;
+        left: 0;right: 0;
+        top:40px;
+    }
+    .edit-head-pic img{
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        margin: auto;
+        top:0;bottom: 0;
+        left: 0;right: 0;
+    }
+    .nav-pulldown{
+        box-shadow: none;
+    }
+    .personal-leftNav{
+        position: fixed;
+    }
+    .capsule-ul{
+        padding-left: 0;
+        margin-top: 0;
+        width: 170px;
+        color: #797979;
+        font-family:"YaHei Consolas Hybrid", Consolas, "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", courier, monospace;
+    }
+    .capsule-ul li{
+        padding-left: 20px;
+        line-height: 3em;
+        height: 3em;
+        border-radius: 5px;
+    }
+    .capsule-ul .active{
+        background: #8897a6;
+        color: white;
+    }
+    .ico{
+        margin-right:10px;
+        width: 20px;
+        height: 48px;
+        line-height: 48px;
+        display: inline-block;
+    }
+    .ico img{
+        width: 100%;
+        position: relative;
+        top:5px;
+    }
+    .main-information{
+        height: 100%;
         background-color: white;
         border: 1px solid #ddd;
+        padding: 20px ;
     }
+    h2{
+        color: #333;
+        height: 2em;
+        margin: auto;
+        border-bottom:1px solid #ccc ;
+    }
+    form .row{
+        margin-top: 20px;
+        color: #555;
+     /*   border-bottom:1px solid #ddd ;
+        padding: 10px;*/
+    }
+    form .row label{
+        display: inline-block;
+        width:150px;
+    }
+    form .row input,.form-static{
+        display: inline-block;
+        width:300px;
+        padding-left: 1em;
+        height: 3em;
+        line-height: 3em;
+    }
+    .form-static{
+        margin: 0;
+    }
+    form .row input{
+        border: 1px solid #aaa;
+        border-radius: 5px ;
+    }
+    .partOfInfo{
+        margin-bottom: 100px;
+    }
+    .nothing{
+        text-align: center;
+        color:#555;
+        margin: 1em;
+    }
+    .comments{
+        border: none;
+    }
+    .partOfComments{
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+    }
+    .partOfComments .commentTime,.partOfComments .viewComments{
+        color: #777;
+    }
+    .partOfComments .viewComments{
+        position: absolute;
+        right: 0;
+        margin-right: 20px;
+    }
+
 </style>
 <body>
 <div class="top-nav">
@@ -96,16 +200,75 @@
 <div class="center-bar">
     <div class="container">
         <div id="nameAndPic">
-            <img class="personal-headpic" src="img/bear.jpeg">
-            <div><a href="#" class="edit-head-pic"></a></div>
-            <div id="idname-nav"><span class="id-name">陈辰</span><span class="edit-ico"></span></div>
+            <img class="personal-headpic" src="img/bear.jpeg" @mouseenter="isShow = !isShow" >
+            <a href="#" v-show="isShow" @mouseleave="isShow = !isShow">
+                <div class="edit-head-pic">
+                    <img src="img/album.png">
+                </div>
+            </a>
+
+            <span class="id-name">陈辰</span>
         </div>
         <div id="personal-information">
-            <div class="main-information">
-
-            </div>
-            <div class="right-sidebar"></div>
+        <div class="personal-leftNav">
+            <ul class="capsule-ul">
+                <li class="active"><a href="#"><span class="ico"><img src="img/info.png"></span>个人资料</a></li>
+                <li ><a href="#"><span class="ico"><img src="img/password.png"></span>修改密码</a></li>
+                <li > <a href="#"><span class="ico"><img src="img/comment.png"></span>我的评论</a></li>
+            </ul>
         </div>
+        <div class="main-information">
+            <div class="partOfInfo">
+                <h2>个人资料</h2>
+                <form>
+                    <div class="row">
+                        <label>名称</label>
+                        <p class="form-static">陈辰</p>
+                    </div>
+                    <div class="row">
+                        <label>电子邮箱</label>
+                        <input type="email" placeholder="请输入电子邮箱" value="chenchen@Tencent.com">
+                    </div>
+                </form>
+            </div>
+            <div class="partOfInfo">
+            <h2>修改密码</h2>
+            <form>
+                <div class="row">
+                    <label>新密码</label>
+                    <input type="password" placeholder="请输入新的密码"  >
+                </div>
+                <div class="row">
+                    <label>确认密码</label>
+                    <input type="password" placeholder="请确认密码"  >
+                </div>
+            </form>
+        </div>
+            <div class="partOfInfo">
+                <h2>我的评论</h2>
+                <!-- <div class="nothing">暂无内容</div>-->
+                <div class="partOfComments">
+                    <a href="#">
+                        <p class="comments">
+                            我是猪我是猪
+                        </p>
+                    </a>
+                    <span class="commentTime">2019-2-18</span>
+                    <span class="viewComments"><a href="#">查看评论</a></span>
+                </div>
+                <div class="partOfComments">
+                    <a href="#">
+                        <p class="comments">
+                           哈哈哈哈
+                        </p>
+                    </a>
+                    <span class="commentTime">2019-2-18</span>
+                    <span class="viewComments"><a href="#">查看评论</a></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
     </div>
 </div>
 <div class="webpage-footer">
@@ -116,6 +279,21 @@
 <script src="js/global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-
+    new Vue({
+        el: '#nameAndPic',
+        data: {
+            isShow: false
+        },
+        methods:{
+            onEnter:function (isShow) {
+                isShow = !isShow;
+                return isShow;
+            },
+            onOut:function (isShow) {
+                isShow = !isShow;
+                return isShow;
+            }
+        }
+    })
 </script>
 </html>

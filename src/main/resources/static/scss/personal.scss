@@ -1,0 +1,18 @@
+$head-pic-width:140px;
+$head-pic-BR:10px;
+.personal-headpic, .edit-head-pic{
+  width:$head-pic-width;
+  height: $head-pic-width;
+  border-radius:$head-pic-BR;
+}
+#idname-nav{
+  widows:$head-pic-width;
+}
+
+$left-li-width:170px;
+.capsule-ul{
+  width: $left-li-width;
+}
+.main-information{
+  margin-left:$left-li-width + 20px;
+}
