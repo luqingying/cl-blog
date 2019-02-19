@@ -16,3 +16,16 @@ $left-li-width:170px;
 .main-information{
   margin-left:$left-li-width + 20px;
 }
+
+$leftNav-BR:5px;
+.personal-leftNav,
+.capsule-ul,
+.capsule-ul li{
+  border-radius:$leftNav-BR;
+}
+.pull-ico{
+  border-top-right-radius: $leftNav-BR;
+  border-bottom-right-radius: $leftNav-BR;
+}
+
+

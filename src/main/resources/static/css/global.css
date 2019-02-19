@@ -238,6 +238,7 @@ a{
     line-height: 2em;
 }
 .pagination{
+    text-align: center;
     left: 0;
     position: absolute;
     margin: auto;

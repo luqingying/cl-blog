@@ -12,4 +12,13 @@
 .main-information {
   margin-left: 190px; }
 
+.personal-leftNav,
+.capsule-ul,
+.capsule-ul li {
+  border-radius: 5px; }
+
+.pull-ico {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
 /*# sourceMappingURL=personal.css.map */

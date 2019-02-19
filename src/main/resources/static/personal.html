@@ -9,161 +9,247 @@
 <link rel="stylesheet" href="scss/personal.css" type="text/css"/>
 <style type="text/css">
 
-    #nameAndPic{
+    #nameAndPic {
         width: 100%;
         margin: auto;
         padding-top: 40px;
         padding-bottom: 72px;
         text-align: center;
-        background-color:#3d3d3f;
+        background-color: #3d3d3f;
     }
 
-    .personal-headpic,.edit-head-pic{
-        border:5px white solid;
+    .personal-headpic, .edit-head-pic {
+        border: 5px white solid;
     }
-    /*.container{
-        background-color: white;
-    }*/
 
-/*    #idname-nav{
-        height: 30px;
-
-        padding: 0;
-    }*/
-    .id-name{
-        display:block;
+    .id-name {
+        display: block;
         font-size: 24px;
         color: white;
         font-weight: bold;
         left: 0;
         right: 0;
-        margin:10px auto;
+        margin: 10px auto;
         position: absolute;
     }
-   /* .edit-ico{
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        background: url("img/edit-white.png");
-        background-size: 100%;
-    }*/
 
-    #personal-information{
+    #personal-information {
         width: 100%;
         margin: auto;
         padding-top: 20px;
     }
-    .edit-head-pic{
-        background: rgba(0,0,0,0.5);
+
+
+    .edit-head-pic {
+        background: rgba(0, 0, 0, 0.5);
         position: absolute;
         z-index: 10;
         margin: auto;
-        left: 0;right: 0;
-        top:40px;
+        left: 0;
+        right: 0;
+        top: 40px;
     }
-    .edit-head-pic img{
+
+    .edit-head-pic img {
         width: 32px;
         height: 32px;
         position: absolute;
         margin: auto;
-        top:0;bottom: 0;
-        left: 0;right: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
-    .nav-pulldown{
+
+    .nav-pulldown {
         box-shadow: none;
     }
-    .personal-leftNav{
+
+    .personal-leftNav {
         position: fixed;
+        z-index: 10;
     }
-    .capsule-ul{
+
+    .capsule-ul {
         padding-left: 0;
         margin-top: 0;
         width: 170px;
         color: #797979;
-        font-family:"YaHei Consolas Hybrid", Consolas, "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", courier, monospace;
+        font-family: "YaHei Consolas Hybrid", Consolas, "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", courier, monospace;
     }
-    .capsule-ul li{
+
+    .capsule-ul li {
         padding-left: 20px;
         line-height: 3em;
         height: 3em;
-        border-radius: 5px;
     }
-    .capsule-ul .active{
+
+    .capsule-ul .active {
         background: #8897a6;
         color: white;
     }
-    .ico{
-        margin-right:10px;
+
+    .pull-ico {
+        position: absolute;
+        top: 0;
+        right: -36px;
+        background: white;
+        border: 1px solid #ccc;
+        border-left: 1px solid white;
+        display: none;
+        box-shadow: 0 6px 12px #ccc;
+    }
+
+    .pull-ico span {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        margin: 6px;
+        position: relative;
+        top: 2px;
+        background: url("img/pullright.svg");
+        background-size: 100%;
+    }
+
+    .ico {
+        margin-right: 10px;
         width: 20px;
         height: 48px;
         line-height: 48px;
         display: inline-block;
     }
-    .ico img{
+
+    .ico img {
         width: 100%;
         position: relative;
-        top:5px;
+        top: 5px;
     }
-    .main-information{
+
+    .main-information {
         height: 100%;
         background-color: white;
+        position: relative;
         border: 1px solid #ddd;
-        padding: 20px ;
+        padding: 20px;
     }
-    h2{
+
+    h2 {
         color: #333;
         height: 2em;
         margin: auto;
-        border-bottom:1px solid #ccc ;
+        border-bottom: 1px solid #ccc;
     }
-    form .row{
+
+    form .row {
         margin-top: 20px;
         color: #555;
-     /*   border-bottom:1px solid #ddd ;
-        padding: 10px;*/
+        /*   border-bottom:1px solid #ddd ;
+           padding: 10px;*/
     }
-    form .row label{
+
+    form .row label {
         display: inline-block;
-        width:150px;
+        width: 150px;
     }
-    form .row input,.form-static{
+
+    form .row input, .form-static {
         display: inline-block;
-        width:300px;
+        width: 300px;
         padding-left: 1em;
         height: 3em;
         line-height: 3em;
     }
-    .form-static{
+
+    .form-static {
         margin: 0;
     }
-    form .row input{
+
+    form .row input {
         border: 1px solid #aaa;
-        border-radius: 5px ;
+        border-radius: 5px;
     }
-    .partOfInfo{
+
+    .partOfInfo {
         margin-bottom: 100px;
     }
-    .nothing{
+
+    .nothing {
         text-align: center;
-        color:#555;
+        color: #555;
         margin: 1em;
     }
-    .comments{
+
+    .comments {
         border: none;
     }
-    .partOfComments{
+
+    .partOfComments {
         border-bottom: 1px solid #ddd;
         padding-bottom: 20px;
     }
-    .partOfComments .commentTime,.partOfComments .viewComments{
+
+    .partOfComments .commentTime, .partOfComments .viewComments {
         color: #777;
     }
-    .partOfComments .viewComments{
+
+    .partOfComments .viewComments {
         position: absolute;
         right: 0;
         margin-right: 20px;
     }
 
+    .btn {
+        padding: 0 2em;
+        height: 3em;
+        line-height: 3em;
+        border-radius: 5px;
+        border: none;
+
+    }
+
+    .save, .changePSW {
+        position: absolute;
+        right: 20px;
+        background: #8897a6;
+        color: white;
+    }
+
+    .pagination {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .personal-leftNav .capsule-ul {
+            background-color: white;
+            box-shadow: 0 6px 12px #ccc;
+            display: none;
+        }
+        .show.capsule-ul{
+            display: inline-block;
+        }
+        .pull-ico {
+            display: inline-block;
+        }
+        span.back{
+            background: url("img/pullleft.svg");
+            background-size: 100%;
+        }
+        .main-information {
+            margin-left: 0;
+        }
+
+        form .row label {
+            width: 100px;
+        }
+
+        form .row input, .form-static {
+            width: 230px;
+        }
+    }
+
+    /*.hide{
+        display: none;
+    }*/
 </style>
 <body>
 <div class="top-nav">
@@ -203,7 +289,7 @@
 <div class="center-bar">
     <div class="container">
         <div id="nameAndPic">
-            <img class="personal-headpic" src="img/bear.jpeg" @mouseenter="isShow = !isShow" >
+            <img class="personal-headpic" src="img/bear.jpeg" @mouseenter="isHide = !isShow" >
             <a href="#" v-show="isShow" @mouseleave="isShow = !isShow">
                 <div class="edit-head-pic">
                     <img src="img/album.png">
@@ -214,13 +300,17 @@
         </div>
         <div id="personal-information">
         <div class="personal-leftNav">
-            <ul class="capsule-ul">
+            <ul class="capsule-ul"  v-bind:class="{'show':isShow}">
                 <li class="active"><a href="#"><span class="ico"><img src="img/info.png"></span>个人资料</a></li>
                 <li ><a href="#"><span class="ico"><img src="img/password.png"></span>修改密码</a></li>
                 <li > <a href="#"><span class="ico"><img src="img/comment.png"></span>我的评论</a></li>
             </ul>
+            <div class="pull-ico" v-on:click="isShow = !isShow" >
+                <span v-bind:class="{'back':isShow}"></span>
+            </div>
         </div>
         <div class="main-information">
+            <div></div>
             <div class="partOfInfo">
                 <h2>个人资料</h2>
                 <form>
@@ -231,6 +321,9 @@
                     <div class="row">
                         <label>电子邮箱</label>
                         <input type="email" placeholder="请输入电子邮箱" value="chenchen@Tencent.com">
+                    </div>
+                    <div class="row">
+                        <button class="btn save">保存</button>
                     </div>
                 </form>
             </div>
@@ -244,6 +337,9 @@
                 <div class="row">
                     <label>确认密码</label>
                     <input type="password" placeholder="请确认密码" autocomplete='new-password' >
+                </div>
+                <div class="row">
+                    <button class="btn changePSW">确认修改</button>
                 </div>
             </form>
         </div>
@@ -268,6 +364,15 @@
                     <span class="commentTime">2019-2-18</span>
                     <span class="viewComments"><a href="#">查看评论</a></span>
                 </div>
+                <ul class="pagination">
+                    <li>&laquo;</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>&raquo;</li>
+                </ul>
             </div>
         </div>
 
@@ -282,7 +387,7 @@
 <script src="js/global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    new Vue({
+/*    new Vue({
         el: '.personal-leftNav',
         methods:{
             mounted () {
@@ -293,7 +398,7 @@
                 console.log(scrollTop);
             }
         }
-    });
+    });*/
 
     new Vue({
         el: '#nameAndPic',
@@ -309,6 +414,13 @@
                 isShow = !isShow;
                 return isShow;
             }
+        }
+    })
+
+    new Vue({
+        el: '.personal-leftNav',
+        data: {
+            isShow:false
         }
     })
 </script>
