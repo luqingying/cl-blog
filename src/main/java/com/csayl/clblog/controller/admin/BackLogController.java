@@ -72,4 +72,16 @@ public class BackLogController {
         }
         return ResponseData.succeed(pageInfo);
     }
+
+    @GetMapping("/count")
+    public ResponseData<Integer> getCount() {
+        Integer count;
+        try {
+            count = logService.getCount();
+        } catch (Exception e) {
+            LOGGER.debug("获取日志数量时,", e);
+            return ResponseData.fail("暂无日志");
+        }
+        return ResponseData.succeed(count);
+    }
 }
