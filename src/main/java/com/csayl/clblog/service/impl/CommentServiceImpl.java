@@ -111,6 +111,18 @@ public class CommentServiceImpl implements CommentService {
 
     @Cacheable("comment")
     @Override
+    public PageInfo<CommentBo> selectComments(Integer pageNum, Integer pageSize) throws NoSuchBeanException {
+        PageInfo<CommentBo> res;
+        try {
+            res = selectComments(null, null, null, OrderBy.CREATE_TIME_DESC, pageNum, pageSize);
+        } catch (NoSuchBeanException e) {
+            throw new NoSuchBeanException("目前暂无评论");
+        }
+        return res;
+    }
+
+    @Cacheable("comment")
+    @Override
     public PageInfo<CommentBo> selectComments(Long userId, Long articleId, Long rootCommentId, OrderBy orderBy, Integer pageNum, Integer pageSize) throws NoSuchBeanException {
         PageHelper.startPage(pageNum, pageSize);
         //获得该用户，该文章下的所有评论
@@ -137,6 +149,12 @@ public class CommentServiceImpl implements CommentService {
 
         //将comments封装成commentBo
         return assembleCommentBo(comments);
+    }
+
+    @Cacheable("comment")
+    @Override
+    public Integer getCount() {
+        return commentMapper.countByExample(null);
     }
 
     @Override

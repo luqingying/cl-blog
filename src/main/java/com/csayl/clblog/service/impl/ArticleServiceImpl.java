@@ -223,6 +223,12 @@ public class ArticleServiceImpl implements ArticleService {
         return res;
     }
 
+    @Cacheable(value = "article")
+    @Override
+    public Integer getCount() {
+        return articleMapper.countByExample(null);
+    }
+
     @Transactional
     @Override
     public void deleteArticleByArticleId(Long articleId) throws NoSuchBeanException {
@@ -312,7 +318,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     private List<ArticleBo> assembleArticles(List<Article> articles, List<List<CategoryBo>> categories, List<UserBo> userBos) {
         List<ArticleBo> articleBos = new ArrayList<>();
-        ArticleBo articleBo;
         for (int i = 0; i < articles.size(); i++) {
             articleBos.add(new ArticleBo(userBos.get(i), articles.get(i), null, categories.get(i)));
         }

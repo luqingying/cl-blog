@@ -35,6 +35,8 @@ public interface CommentService {
 
     PageInfo<CommentBo> selectLatestComments(Integer commentNum) throws WrongFieldException, NoSuchBeanException;
 
+    PageInfo<CommentBo> selectComments(Integer pageNum, Integer pageSize) throws NoSuchBeanException;
+
     /**
      * 查询关于该用户、该文章的所有评论
      *
@@ -48,6 +50,8 @@ public interface CommentService {
      * @throws NoSuchBeanException 评论不存在
      */
     PageInfo<CommentBo> selectComments(Long userId, Long articleId, Long rootCommentId, OrderBy orderBy, Integer pageNum, Integer pageSize) throws NoSuchBeanException;
+
+    Integer getCount();
 
     void deleteCommentByCommentId(Long commentId) throws NoSuchBeanException;
 }

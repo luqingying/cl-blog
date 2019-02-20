@@ -1,251 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.csayl.clblog.mapper.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.csayl.clblog.model.domain.Comment">
-    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
-    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
-    <result column="p_comment_id" jdbcType="BIGINT" property="pCommentId" />
-    <result column="root_comment_id" jdbcType="BIGINT" property="rootCommentId" />
-    <result column="p_user_id" jdbcType="BIGINT" property="pUserId" />
-    <result column="p_article_id" jdbcType="BIGINT" property="pArticleId" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.csayl.clblog.model.domain.Comment">
+        <id column="comment_id" jdbcType="BIGINT" property="commentId"/>
+        <result column="comment_content" jdbcType="VARCHAR" property="commentContent"/>
+        <result column="p_comment_id" jdbcType="BIGINT" property="pCommentId"/>
+        <result column="root_comment_id" jdbcType="BIGINT" property="rootCommentId"/>
+        <result column="p_user_id" jdbcType="BIGINT" property="pUserId"/>
+        <result column="p_article_id" jdbcType="BIGINT" property="pArticleId"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     comment_id, comment_content, p_comment_id, root_comment_id, p_user_id, p_article_id, 
     gmt_create, gmt_modified
   </sql>
-  <select id="selectByExample" parameterType="com.csayl.clblog.model.domain.CommentExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tbl_comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_comment
-    where comment_id = #{commentId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByExample" parameterType="com.csayl.clblog.model.domain.CommentExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tbl_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_comment
+        where comment_id = #{commentId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tbl_comment
     where comment_id = #{commentId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.csayl.clblog.model.domain.CommentExample">
-    delete from tbl_comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.csayl.clblog.model.domain.Comment">
-    <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tbl_comment (comment_content, p_comment_id, root_comment_id, 
-      p_user_id, p_article_id, gmt_create, 
-      gmt_modified)
-    values (#{commentContent,jdbcType=VARCHAR}, #{pCommentId,jdbcType=BIGINT}, #{rootCommentId,jdbcType=BIGINT}, 
-      #{pUserId,jdbcType=BIGINT}, #{pArticleId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.csayl.clblog.model.domain.Comment">
-    <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tbl_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="commentContent != null">
-        comment_content,
-      </if>
-      <if test="pCommentId != null">
-        p_comment_id,
-      </if>
-      <if test="rootCommentId != null">
-        root_comment_id,
-      </if>
-      <if test="pUserId != null">
-        p_user_id,
-      </if>
-      <if test="pArticleId != null">
-        p_article_id,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="commentContent != null">
-        #{commentContent,jdbcType=VARCHAR},
-      </if>
-      <if test="pCommentId != null">
-        #{pCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="rootCommentId != null">
-        #{rootCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="pUserId != null">
-        #{pUserId,jdbcType=BIGINT},
-      </if>
-      <if test="pArticleId != null">
-        #{pArticleId,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.csayl.clblog.model.domain.CommentExample" resultType="java.lang.Long">
-    select count(*) from tbl_comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tbl_comment
-    <set>
-      <if test="record.commentId != null">
-        comment_id = #{record.commentId,jdbcType=BIGINT},
-      </if>
-      <if test="record.commentContent != null">
+    <delete id="deleteByExample" parameterType="com.csayl.clblog.model.domain.CommentExample">
+        delete from tbl_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.csayl.clblog.model.domain.Comment">
+        <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tbl_comment (comment_content, p_comment_id, root_comment_id,
+        p_user_id, p_article_id, gmt_create,
+        gmt_modified)
+        values (#{commentContent,jdbcType=VARCHAR}, #{pCommentId,jdbcType=BIGINT}, #{rootCommentId,jdbcType=BIGINT},
+        #{pUserId,jdbcType=BIGINT}, #{pArticleId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.csayl.clblog.model.domain.Comment">
+        <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tbl_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentContent != null">
+                comment_content,
+            </if>
+            <if test="pCommentId != null">
+                p_comment_id,
+            </if>
+            <if test="rootCommentId != null">
+                root_comment_id,
+            </if>
+            <if test="pUserId != null">
+                p_user_id,
+            </if>
+            <if test="pArticleId != null">
+                p_article_id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentContent != null">
+                #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="pCommentId != null">
+                #{pCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="rootCommentId != null">
+                #{rootCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="pUserId != null">
+                #{pUserId,jdbcType=BIGINT},
+            </if>
+            <if test="pArticleId != null">
+                #{pArticleId,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.csayl.clblog.model.domain.CommentExample"
+            resultType="java.lang.Integer">
+        select count(*) from tbl_comment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tbl_comment
+        <set>
+            <if test="record.commentId != null">
+                comment_id = #{record.commentId,jdbcType=BIGINT},
+            </if>
+            <if test="record.commentContent != null">
+                comment_content = #{record.commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pCommentId != null">
+                p_comment_id = #{record.pCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="record.rootCommentId != null">
+                root_comment_id = #{record.rootCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="record.pUserId != null">
+                p_user_id = #{record.pUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.pArticleId != null">
+                p_article_id = #{record.pArticleId,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.gmtModified != null">
+                gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tbl_comment
+        set comment_id = #{record.commentId,jdbcType=BIGINT},
         comment_content = #{record.commentContent,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pCommentId != null">
         p_comment_id = #{record.pCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="record.rootCommentId != null">
         root_comment_id = #{record.rootCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="record.pUserId != null">
         p_user_id = #{record.pUserId,jdbcType=BIGINT},
-      </if>
-      <if test="record.pArticleId != null">
         p_article_id = #{record.pArticleId,jdbcType=BIGINT},
-      </if>
-      <if test="record.gmtCreate != null">
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtModified != null">
-        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tbl_comment
-    set comment_id = #{record.commentId,jdbcType=BIGINT},
-      comment_content = #{record.commentContent,jdbcType=VARCHAR},
-      p_comment_id = #{record.pCommentId,jdbcType=BIGINT},
-      root_comment_id = #{record.rootCommentId,jdbcType=BIGINT},
-      p_user_id = #{record.pUserId,jdbcType=BIGINT},
-      p_article_id = #{record.pArticleId,jdbcType=BIGINT},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.csayl.clblog.model.domain.Comment">
-    update tbl_comment
-    <set>
-      <if test="commentContent != null">
-        comment_content = #{commentContent,jdbcType=VARCHAR},
-      </if>
-      <if test="pCommentId != null">
-        p_comment_id = #{pCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="rootCommentId != null">
-        root_comment_id = #{rootCommentId,jdbcType=BIGINT},
-      </if>
-      <if test="pUserId != null">
-        p_user_id = #{pUserId,jdbcType=BIGINT},
-      </if>
-      <if test="pArticleId != null">
-        p_article_id = #{pArticleId,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where comment_id = #{commentId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.csayl.clblog.model.domain.Comment">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.csayl.clblog.model.domain.Comment">
+        update tbl_comment
+        <set>
+            <if test="commentContent != null">
+                comment_content = #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="pCommentId != null">
+                p_comment_id = #{pCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="rootCommentId != null">
+                root_comment_id = #{rootCommentId,jdbcType=BIGINT},
+            </if>
+            <if test="pUserId != null">
+                p_user_id = #{pUserId,jdbcType=BIGINT},
+            </if>
+            <if test="pArticleId != null">
+                p_article_id = #{pArticleId,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where comment_id = #{commentId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.csayl.clblog.model.domain.Comment">
     update tbl_comment
     set comment_content = #{commentContent,jdbcType=VARCHAR},
       p_comment_id = #{pCommentId,jdbcType=BIGINT},
