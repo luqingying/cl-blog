@@ -125,21 +125,20 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>所属文章</th>
-            <th>评论用户</th>
+            <th>文章ID</th>
+            <th>评论用户ID</th>
             <th>评论内容</th>
             <th>评论时间</th>
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-
-        <tr>
-            <td>123</td>
-            <td><a href="#">这是一个标题</a></td>
-            <td><a href="#">陈猪猪</a></td>
-            <td><a href="#">我是一个粑粑怪</a></td>
-            <td>2019-2-15 16:38</td>
+        <tbody  id="comment">
+        <tr  v-for="comments in commentList">
+            <td>{{comments.comment.commentId}}</td>
+            <td><a href="#">{{comments.comment.particleId}}</a></td>
+            <td><a href="#">{{comments.creator.user.userId}}</a></td>
+            <td><a href="#">{{comments.comment.commentContent}}</a></td>
+            <td>{{comments.comment.gmtCreate}}</td>
             <td>
                 <button type="button" class="btn btn-danger">删除</button>
             </td>
@@ -163,7 +162,29 @@
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script type="text/javascript">
+    new Vue({
+            el: '#comment',
+            data() {
+                return {
+                    commentList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/admin/comment/all')
+                    .then(response => {
+                        this.commentList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 
 
 </script>

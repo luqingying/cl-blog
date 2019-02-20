@@ -95,10 +95,12 @@
     .tag-class:nth-child( 6n+5 ) {
         background-color: #c2b7ce;
     }
-    h3 small{
+
+    h3 small {
         margin-left: 10px;
     }
-    .addTagico ,.deleteTagico,.editTagico{
+
+    .addTagico, .deleteTagico, .editTagico {
         height: 26px;
     }
 </style>
@@ -163,14 +165,14 @@
 <div class="container col-md-10 col-sm-9 col-xs-12 pull-right main">
     <h2>分类管理
         <small class="pull-right"><a href="#" data-toggle="modal" data-target="#addTagModal">
-            <img src="img/addtag.png" class="addTagico" >添加分类</a></small>
+            <img src="img/addtag.png" class="addTagico">添加分类</a></small>
     </h2>
-    <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" >添加分类</h4>
+                    <h4 class="modal-title">添加分类</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
@@ -189,38 +191,25 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-    <button type="button" class="tag-class">Java</button>
-    <button type="button" class="tag-class">Jvm</button>
-    <button type="button" class="tag-class">JavaScript</button>
-    <button type="button" class="tag-class">CSS</button>
-    <button type="button" class="tag-class">HTML</button>
-    <button type="button" class="tag-class">Jvm</button>
-    <button type="button" class="tag-class">JavaScript</button>
-    <button type="button" class="tag-class">CSS</button>
-    <button type="button" class="tag-class">lalalalall</button>
-    <button type="button" class="tag-class">Jvm</button>
-    <button type="button" class="tag-class">JavaScript</button>
-    <button type="button" class="tag-class">CSS</button>
-    <button type="button" class="tag-class">HTML</button>
-    <button type="button" class="tag-class">Jvm</button>
-    <button type="button" class="tag-class">JavaScript</button>
-    <button type="button" class="tag-class">CSS</button>
-    <button type="button" class="tag-class">HTML</button>
+    <div id="category">
+        <button v-for="categories in categoryList" type="button" class="tag-class">
+            {{categories.category.categoryContent}}
+        </button>
+    </div>
     <hr>
     <h3>Java
         <small>分类下的文章</small>
-
         <small class="pull-right"><a href="#" data-toggle="modal" data-target="#deleteTagModal">
-            <img src="img/delete.png" class="deleteTagico" >删除该分类</a></small>
+            <img src="img/delete.png" class="deleteTagico">删除该分类</a></small>
         <small class="pull-right"><a href="#" data-toggle="modal" data-target="#editTagModal">
-            <img src="img/edit.png" class="editTagico" >编辑该分类</a></small>
+            <img src="img/edit.png" class="editTagico">编辑该分类</a></small>
     </h3>
-    <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" >确认删除</h4>
+                    <h4 class="modal-title">确认删除</h4>
                 </div>
                 <div class="modal-body">
                     陈猪猪你想好哦，是不是要删掉这个分类？
@@ -237,14 +226,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" >编辑分类</h4>
+                    <h4 class="modal-title">编辑分类</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="categoryName" class="col-sm-2 control-label">分类名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="category-input" placeholder="请输入类名" value="Java">
+                                <input type="text" class="form-control" id="category-input" placeholder="请输入类名"
+                                       value="Java">
                             </div>
                         </div>
                     </form>
@@ -262,21 +252,29 @@
             <th>ID</th>
             <th>标题</th>
             <th>作者</th>
-            <th>时间</th>
+            <th>分类</th>
+            <th>阅读量</th>
+            <th>是否置顶</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>123</td>
-            <td><a href="#">这是一个标题</a></td>
-            <td><a href="#">陈猪猪</a></td>
-            <td>2019-2-15 16:38</td>
+        <tbody id="article">
+        <tr v-for="articles in articleList">
+            <td>{{articles.article.articleId}}</td>
+            <td><a href="#">{{articles.article.articleName}}</a></td>
+            <td><a href="#">{{articles.creator.user.userName}}</a></td>
+            <td><span v-for="categories in articles.categories">#{{categories.category.categoryContent}}</span></td>
+            <td>{{articles.article.articleReading}}</td>
+            <td>{{articles.article.articleIsTop}}</td>
+            <td>{{articles.article.gmtCreate}}</td>
+            <td>{{articles.article.gmtModified}}</td>
             <td>
+                <button type="button" class="btn btn-primary">编辑</button>
                 <button type="button" class="btn btn-danger">删除</button>
             </td>
         </tr>
-
         </tbody>
     </table>
 
@@ -285,20 +283,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" >编辑友链</h4>
+                    <h4 class="modal-title">编辑友链</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="linkUrl" class="col-sm-2 control-label">友链URL</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="linkUrl" placeholder="请输入URL" value="www.baidu.com">
+                                <input type="text" class="form-control" id="linkUrl" placeholder="请输入URL"
+                                       value="www.baidu.com">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="linkDescription" class="col-sm-2 control-label">类名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="linkDescription" placeholder="请输入描述" value="百度">
+                                <input type="text" class="form-control" id="linkDescription" placeholder="请输入描述"
+                                       value="百度">
                             </div>
                         </div>
                     </form>
@@ -310,7 +310,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-
 
     <nav style="text-align: center">
         <ul class="pagination">
@@ -331,8 +330,49 @@
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script type="text/javascript">
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<script type="text/javascript">
+    new Vue({
+            el: '#category',
+            data() {
+                return {
+                    categoryList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/category/all')
+                    .then(response => {
+                        this.categoryList = response.data.resource;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+
+
+    new Vue({
+            el: '#article',
+            data() {
+                return {
+                    articleList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/article/all')
+                    .then(response => {
+                        this.articleList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 
 </script>
 </html>

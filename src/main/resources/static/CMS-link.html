@@ -133,15 +133,13 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-
-
-        <tr>
-            <td>1</td>
-            <td><a href="https://www.baidu.com">www.baidu.com</a></td>
-            <td>百度</td>
-            <td>2019-2-15 16:38</td>
-            <td>2019-2-15 16:38</td>
+        <tbody id="link">
+        <tr  v-for="links in linkList">
+            <td>{{links.link.linkId}}</td>
+            <td><a href="https://www.baidu.com">{{links.link.linkUrl}}</a></td>
+            <td>{{links.link.linkDescription}}</td>
+            <td>{{links.link.gmtCreate}}</td>
+            <td>{{links.link.gmtModified}}</td>
             <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLinkModal">编辑</button>
                 <button type="button" class="btn btn-danger">删除</button>
@@ -199,8 +197,28 @@
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-
+    new Vue({
+            el: '#link',
+            data() {
+                return {
+                    linkList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/link/all')
+                    .then(response => {
+                        this.linkList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 
 </script>
 </html>

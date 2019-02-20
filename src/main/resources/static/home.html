@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
@@ -20,14 +20,14 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
-                <ul class="nav-pulldown" v-show="isShow" >
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
+                                                                                                     src="img/bear.jpeg"><a
+                    href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow">
                     <li><a href="#">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
             </li>
-
-
         </ul>
     </div>
     <div class="small-nav">
@@ -45,13 +45,8 @@
     </div>
 </div>
 <div class="center-bar">
-    <div></div>
     <div class="container">
         <div class="articles-bar main" id="article">
-            <div class="article">
-                <div>
-                </div>
-            </div>
             <div class="article" v-for="item in dataList">
                 <div class="article-cover-pic">
                     <img src="{{item.article.articleCoverUrl}}">
@@ -69,24 +64,6 @@
                     </div>
                 </div>
             </div>
-            <div class="article">
-                <div class="article-cover-pic">
-                </div>
-                <div class="article-brief">
-                    <h3 class="article-title"></h3>
-                    <div class="title-spans">
-                        <span>2018-1-18</span>
-                        <span>陈辰</span>
-                        <span>3条评论</span>
-                        <span>111次浏览</span>
-                    </div>
-                    <p class="content-brief"> 关于这个想法已经有了很长时间了，今天把这个flag插在这里，一点点实现这个计划。 对于WordPress，“重”对于我是太大的痛点。
-                        自己个性定制关于这个想法已经有了很长时间了，今天把</p>
-                    <div class="article-tags">
-                        <span>#java</span>
-                    </div>
-                </div>
-            </div>
             <ul class="pagination">
                 <li>&laquo;</li>
                 <li>1</li>
@@ -98,28 +75,17 @@
             </ul>
         </div>
         <div class="right-sidebar sidebar">
-            <div id="latest-article" class="partOfsidebar">
-                <h2 class="sidebar-title">最新文章</h2>
-                <ul class="sidebar-ul">
-                    <li>这个想法已经这个想法已经这个想法已经</li>
-                    <li>这个想法已经</li>
-                    <li>这个想法已经</li>
-                    <li>这个想法已经</li>
+            <div id="category" class="partOfsidebar">
+                <h2 class="sidebar-title">文章分类</h2>
+                <ul class="sidebar-ul" v-for="categories in categoryList">
+                    <li>{{categories.category.categoryContent}}</li>
                 </ul>
             </div>
+
             <div id="latest-comment" class="partOfsidebar">
                 <h2 class="sidebar-title">最新评论</h2>
                 <ul class="sidebar-ul" v-for="comments in list">
                     <li>{{comments.comment.commentContent}}</li>
-                </ul>
-            </div>
-            <div id="article-class" class="partOfsidebar">
-                <h2 class="sidebar-title">文章分类</h2>
-                <ul class="sidebar-ul">
-                    <li>题目这个想法已经</li>
-                    <li>题目这个想法已经</li>
-                    <li>题目这个想法已经</li>
-                    <li>题目这个想法已经</li>
                 </ul>
             </div>
         </div>
@@ -146,15 +112,12 @@
         },
         mounted() {
             axios.get('/article/all')
-                  .then(response => {
+                .then(response => {
                     this.dataList = response.data.resource.list;
-                  })
-            /*this.articleName = response.data.resource.list[0].article.articleName;
-             this.gmtCreate = response.data.resource.list[0].article.gmtCreate;
-             this.categories = response.data.resource.list[0].categories[0].category.categoryContent;*/
-                  .catch(function (error) {
+                })
+                .catch(function (error) {
                     console.log(error);
-                  });
+                });
         }
     });
 
@@ -168,14 +131,30 @@
             mounted() {
                 axios.get('/comment/latest')
                     .then(response => {
-                    this.list = response.data.resource.list;
+                        this.list = response.data.resource.list;
                     })
                     .catch(function (error) {
-                      console.log(error);
+                        console.log(error);
                     });
             }
         }
-    )
-
-
+    );
+    new Vue({
+            el: '#category',
+            data() {
+                return {
+                    categoryList: ["暂无分类"]
+                }
+            },
+            mounted() {
+                axios.get('/category/all')
+                    .then(response => {
+                        this.categoryList = response.data.resource;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 </script>

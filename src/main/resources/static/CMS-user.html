@@ -145,38 +145,17 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td><a href="#">卢猪猪</a></td>
-            <td>luzhuzhuaida@gmail.coom</td>
-            <td>dwsafdsfarwq</td>
-            <td>2019-2-15 16:38</td>
+        <tbody id="user">
+        <tr  v-for="users in userList">
+            <td>{{users.user.userId}}</td>
+            <td><a href="#">{{users.user.userName}}</a></td>
+            <td>{{users.user.userEmail}}</td>
+            <td>{{users.user.userImageUrl}}</td>
+            <td>{{users.user.gmtCreate}}</td>
             <td>
                 <button type="button" class="btn btn-danger">删除</button>
             </td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td><a href="#">卢猪猪</a></td>
-            <td>luzhuzhuaida@gmail.coom</td>
-            <td>dwsafdsfarwq</td>
-            <td>2019-2-15 16:38</td>
-            <td>
-                <button type="button" class="btn btn-danger">删除</button>
-            </td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td><a href="#">卢猪猪</a></td>
-            <td>luzhuzhuaida@gmail.coom</td>
-            <td>dwsafdsfarwq</td>
-            <td>2019-2-15 16:38</td>
-            <td>
-                <button type="button" class="btn btn-danger">删除</button>
-            </td>
-        </tr>
-
         </tbody>
     </table>
     <nav style="text-align: center">
@@ -196,8 +175,28 @@
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-
+    new Vue({
+            el: '#user',
+            data() {
+                return {
+                    userList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/admin/user/all')
+                    .then(response => {
+                        this.userList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 
 </script>
 </html>

@@ -50,7 +50,8 @@
         background-color: #8897a6;
         color: white;
     }
-    .nav-head{
+
+    .nav-head {
         width: 25px;
         height: 25px;
         margin-right: 5px;
@@ -123,7 +124,7 @@
         display: block;
     }
 
-    .idname {
+    .username {
         color: #337ab7;
         padding-right: 10px;
     }
@@ -136,7 +137,7 @@
         padding-right: 10px;
     }
 
-    .comment {
+    .content {
         height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -169,7 +170,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="active"><a href="CMS-instrument.html">仪表盘</a></li>
-                    <li ><a href="CMS-article.html">文章</a></li>
+                    <li><a href="CMS-article.html">文章</a></li>
                     <li><a href="CMS-comment.html">评论</a></li>
                     <li><a href="CMS-log.html">日志</a></li>
                     <li><a href="CMS-category.html">分类</a></li>
@@ -197,7 +198,7 @@
 <div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
     <ul class="nav">
         <li class="active"><a href="CMS-instrument.html">仪表盘</a></li>
-        <li ><a href="CMS-article.html">文章</a></li>
+        <li><a href="CMS-article.html">文章</a></li>
         <li><a href="CMS-comment.html">评论</a></li>
         <li><a href="CMS-log.html">日志</a></li>
         <li><a href="CMS-category.html">分类</a></li>
@@ -214,9 +215,9 @@
                     <div class="IB-ico">
                         <img src="img/article.png">
                     </div>
-                    <div class="IB-inf0">
+                    <div id="articleCount" class="IB-inf0">
                         <span class="info-text">发表了</span>
-                        <span class="info-num">100</span>
+                        <span class="info-num">{{articleCount}}</span>
                         <span class="info-text">篇文章</span>
                     </div>
                 </a>
@@ -228,9 +229,9 @@
                     <div class="IB-ico">
                         <img src="img/comment.png">
                     </div>
-                    <div class="IB-inf0">
+                    <div id="commentCount" class="IB-inf0">
                         <span class="info-text">收到了</span>
-                        <span class="info-num">100</span>
+                        <span class="info-num">{{commentCount}}</span>
                         <span class="info-text">条评论</span>
                     </div>
                 </a>
@@ -242,81 +243,159 @@
                     <div class="IB-ico">
                         <img src="img/log.png">
                     </div>
-                    <div class="IB-inf0">
-                        <span class="info-text">访问了</span>
-                        <span class="info-num">100</span>
-                        <span class="info-text">次</span>
+                    <div id="logCount" class="IB-inf0">
+                        <span class="info-text">产生了</span>
+                        <span class="info-num">{{logCount}}</span>
+                        <span class="info-text">条日志</span>
                     </div>
                 </a>
             </div>
         </div>
     </div>
     <div id="latest">
-        <div class="col-md-4 col-xs-12 ">
+        <div class="col-md-4 col-xs-12">
             <h3>最新文章</h3>
-            <ul class="list-group latest-article">
-                <li class="list-group-item">
-                    <span class="badge">0</span>文章题目
-                </li>
-                <li class="list-group-item ">
-                    <span class="badge">0</span>文章题目
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">0</span>文章题目
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">0</span>文章题目
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">0</span>文章题目
+            <ul id="article" class="list-group latest-article">
+                <li v-for="articles in articleList" class="list-group-item">
+                    <a href="#">{{articles.article.articleName}}</a><span class="pull-right">{{articles.article.gmtCreate}}</span>
                 </li>
             </ul>
         </div>
         <div class="col-md-4 col-xs-12 ">
             <h3>最新评论</h3>
-            <ul class="list-group latest-comment">
-                <li class="list-group-item">
-                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
-                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
+            <ul id="comment" class="list-group latest-comment">
+                <li v-for="comments in commentList" class="list-group-item">
+                    <span class="username">{{comments.comment.creator.user.userName}}</span><span class="time">{{comments.comment.gmtCreate}}</span>
+                    <span class="content">{{comments.comment.commentContent}}</span>
                 </li>
-                <li class="list-group-item">
-                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
-                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
-                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="idname">卢猪猪是个超级讨厌鬼</span><span class="time">2月15日15:22</span>
-                    <span class="comment">我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪我是一只臭猪</span>
-                </li>
-
             </ul>
         </div>
         <div class="col-md-4 col-xs-12 ">
             <h3>最新日志</h3>
-            <ul class="list-group latest-log">
-                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
-                </li>
-                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
-                </li>
-                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
-                </li>
-                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
-                </li>
-                <li class="list-group-item"><span class="time">2018-2-15 15:34</span><span class="event">登录后台</span>
+            <ul id="log" class="list-group latest-log">
+                <li v-for="logs in logList" class="list-group-item">
+                    <span class="ip">{{logs.log.visitorIp}}</span>访问了<span class="url">{{logs.log.visitUrl}}</span>
+                    <span class="time">{{logs.log.gmtCreate}}</span>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+    new Vue({
+            el: '#article',
+            data() {
+                return {
+                    articleList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/article/all')
+                    .then(response => {
+                        this.articleList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+    new Vue({
+            el: '#comment',
+            data() {
+                return {
+                    commentList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/admin/comment/all')
+                    .then(response => {
+                        this.commentList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+    new Vue({
+            el: '#log',
+            data() {
+                return {
+                    logList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/admin/log/all')
+                    .then(response => {
+                        this.logList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 
-
+    new Vue({
+            el: '#articleCount',
+            data() {
+                return {
+                    articleCount: 0
+                }
+            },
+            mounted() {
+                axios.get('/article/count')
+                    .then(response => {
+                        this.articleCount = response.data.resource;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+    new Vue({
+            el: '#commentCount',
+            data() {
+                return {
+                    commentCount: 0
+                }
+            },
+            mounted() {
+                axios.get('/admin/comment/count')
+                    .then(response => {
+                        this.commentCount = response.data.resource;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+    new Vue({
+            el: '#logCount',
+            data() {
+                return {
+                    logCount: 0
+                }
+            },
+            mounted() {
+                axios.get('/admin/log/count')
+                    .then(response => {
+                        this.logCount = response.data.resource;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 </script>
 </html>
