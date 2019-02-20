@@ -20,11 +20,9 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
-                                                                                                     src="img/bear.jpeg"><a
-                    href="#">陈辰</a><span class="pull-down-ico"></span>
-                <ul class="nav-pulldown" v-show="isShow">
-                    <li><a href="#">个人中心</a></li>
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow" >
+                    <li><a href="personal.html">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
             </li>

@@ -31,7 +31,7 @@
     }
 </style>
 <body>
-    <div class="top-nav">
+<div class="top-nav">
     <div class="container top-nav-container">
         <ul class="top-nav-ul">
             <li><a href="home.html">首页</a></li>
@@ -39,9 +39,18 @@
             <li><a href="archive.html">归档</a></li>
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
+            <!--        <li><a href="#">登录</a></li>-->
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow" >
+                    <li><a href="personal.html">个人中心</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+
+
         </ul>
     </div>
-    <div class="small-nav" >
+    <div class="small-nav">
         <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
         <ul class="snav-ul" v-show="isShow">
             <li><a href="home.html">首页</a></li>
@@ -49,6 +58,9 @@
             <li><a href="archive.html">归档</a></li>
             <li><a href="about.html">关于</a></li>
             <li><a href="friends.html">友链</a></li>
+            <li><img class="nav-head" src="img/bear.jpeg">陈辰<span class="pull-down-ico"></span></li>
+            <li><a href="#">个人中心</a></li>
+            <li><a href="#">退出登录</a></li>
         </ul>
     </div>
 </div>

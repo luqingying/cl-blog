@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="css/global.css" type="text/css"/>
+<link rel="stylesheet" href="scss/global.css" type="text/css"/>
+<style type="text/css">
+    body{
+        background:url("img/back.jpg");
+        background-size: 1850px;
+        background-position:50%;
+        background-repeat: no-repeat;
+    }
+    #login-div{
+        width: 450px;
+        height: 320px;
+        left: 0;
+        right: 0;
+        margin:50px auto;
+        position: absolute;
+    }
+    h2{
+        width: 100%;
+        text-align: center;
+        color:#337ab7;
+        margin-top: 0;
+    }
+    .inputs{
+        width: 450px;
+        position: relative;
+        padding: 0 50px;
+        margin-top: 50px;
+    }
+    .inputs input{
+        width: 100%;
+        height: 3em;
+        margin: 15px auto;
+        line-height: 3em;
+        padding: 1em;
+        border: 2px solid #bbb;
+        border-radius: 1.5em;
+    }
+    #login{
+        width: 50%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        margin:50px auto 0;
+        height: 2em;
+        line-height: 2em;
+        border-radius: 1em;
+        border: none;
+        color: white;
+        font-size: 22px;
+        background: #337ab7;
+    }
+
+
+    @media (max-width: 768px) {
+        #login-div,.inputs{
+            width: 350px;
+        }
+    }
+    @media (min-width: 992px) {
+        #login-div,.inputs{
+            width: 450px;
+        }
+
+    }
+</style>
+<body>
+<div class="top-nav">
+    <div class="container top-nav-container">
+        <ul class="top-nav-ul">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+            <!--        <li><a href="#">登录</a></li>-->
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
+                                                                                                     src="img/bear.jpeg"><a
+                    href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow">
+                    <li><a href="personal.html">个人中心</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="small-nav">
+        <button class="menuSAndH" v-on:click="isShow = !isShow"></button>
+        <ul class="snav-ul" v-show="isShow">
+            <li><a href="home.html">首页</a></li>
+            <li><a href="classes.html">分类</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="friends.html">友链</a></li>
+            <li><img class="nav-head" src="img/bear.jpeg">陈辰<span class="pull-down-ico"></span></li>
+            <li><a href="#">个人中心</a></li>
+            <li><a href="#">退出登录</a></li>
+        </ul>
+    </div>
+</div>
+<div class="center-bar">
+
+        <!--<img class="left-pic" src="img/yuanxiao.jpg">-->
+        <div id="login-div">
+            <h2>用户登录</h2>
+            <div class="inputs">
+                <input type="text" placeholder="账号">
+                <input type="password" placeholder="密码">
+            </div>
+            <button id="login">登录</button>
+        </div>
+</div>
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>
