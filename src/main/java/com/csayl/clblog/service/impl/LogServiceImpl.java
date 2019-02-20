@@ -58,12 +58,6 @@ public class LogServiceImpl implements LogService {
 
     @Cacheable("log")
     @Override
-    public Integer getCount() {
-        return logMapper.countByExample(null);
-    }
-
-    @Cacheable("log")
-    @Override
     public PageInfo<LogBo> selectAllLog(Integer pageNum, Integer pageSize) throws NoSuchBeanException {
         return getLogBoPageInfo(new Attribute(Type.ALL, null), pageNum, pageSize, OrderBy.CREATE_TIME_DESC);
     }

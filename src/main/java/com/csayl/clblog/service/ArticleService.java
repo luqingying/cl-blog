@@ -70,8 +70,8 @@ public interface ArticleService {
      * @param pageSize 每页的数量
      * @param top      置顶
      * @param orderBy  排序依据
-     * @return 结果
-     * @throws NoSuchBeanException 没有文章时
+     * @return
+     * @throws NoSuchBeanException
      */
     PageInfo<ArticleBo> selectArticlesByUserId(Long userId, Integer pageNum, Integer pageSize, Boolean top, OrderBy orderBy) throws NoSuchBeanException;
 
@@ -89,8 +89,6 @@ public interface ArticleService {
 
     PageInfo<ArticleBo> selectArticles(Long userId, Long categoryId, List<Long> articleIds, Integer pageNum,
                                        Integer pageSize, Boolean top, OrderBy orderBy) throws NoSuchBeanException;
-
-    Integer getCount();
 
     @Transactional
     void deleteArticleByArticleId(Long articleId) throws NoSuchBeanException;

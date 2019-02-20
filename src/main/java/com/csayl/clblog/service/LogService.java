@@ -21,7 +21,6 @@ public interface LogService {
 
     PageInfo<LogBo> selectLogByUrl(String url, Integer pageNum, Integer pageSize) throws NoSuchBeanException;
 
-    Integer getCount();
 
     /**
      * 删除日志，ids为null，即删除所有
