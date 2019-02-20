@@ -82,16 +82,4 @@ public class ArticleController {
         }
         return ResponseData.succeed(pageInfo);
     }
-
-    @GetMapping("/count")
-    public ResponseData<Integer> getCount() {
-        Integer count;
-        try {
-            count = articleService.getCount();
-        } catch (Exception e) {
-            LOGGER.debug("获取文章数量时,", e);
-            return ResponseData.fail("暂无文章");
-        }
-        return ResponseData.succeed(count);
-    }
 }
