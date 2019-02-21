@@ -20,7 +20,7 @@
         width: 32px;
         height: 32px;
         display: inline-block;
-        background: url("img/blog.svg");
+        background: url("img/link.svg");
         background-size: 100%;
     }
 
@@ -69,16 +69,13 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="link.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
-                                                                                                     href="#">陈辰</a>
-                <span class="pull-down-ico"></span>
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow">
+                <img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
                 <ul class="nav-pulldown" v-show="isShow">
                     <li><a href="info.html">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
             </li>
-
-
         </ul>
     </div>
     <div class="small-nav">
@@ -96,10 +93,10 @@
     </div>
 </div>
 <div class="center-bar">
-    <div class="container">
-        <div class="friend-link">
+    <div class="container" id="link">
+        <div v-for="links in linkList" class="friend-link">
             <span class="ico"></span>
-            <a href="www.baidu.com">百度</a>
+            <a :href="links.link.linkUrl">{{links.link.linkDescription}}</a>
         </div>
     </div>
 </div>
@@ -107,9 +104,26 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
-<!--<script src="js/vue-form.js"></script>-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/axios.js"></script>
 <script type="text/javascript">
 
+    new Vue({
+            el: '#link',
+            data() {
+                return {
+                    linkList: [""]
+                }
+            },
+            mounted() {
+                axios.get('/link/all')
+                    .then(response => {
+                        this.linkList = response.data.resource.list;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
 </script>
 </html>

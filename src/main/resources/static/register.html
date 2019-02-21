@@ -2,38 +2,40 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户注册</title>
 </head>
 <link rel="stylesheet" href="css/global.css" type="text/css"/>
 <link rel="stylesheet" href="scss/global.css" type="text/css"/>
 <style type="text/css">
-    body{
-        background:url("img/back.jpg");
+    body {
         background-size: 1850px;
-        background-position:50%;
-        background-repeat: no-repeat;
+        background: url("img/back.jpg") no-repeat 50%;
     }
-    #login-div{
+
+    #register-div {
         width: 450px;
         height: 320px;
         left: 0;
         right: 0;
-        margin:50px auto;
+        margin: 50px auto;
         position: absolute;
     }
-    h2{
+
+    h2 {
         width: 100%;
         text-align: center;
-        color:#337ab7;
+        color: #337ab7;
         margin-top: 0;
     }
-    .inputs{
+
+    .inputs {
         width: 450px;
         position: relative;
         padding: 0 50px;
         margin-top: 50px;
     }
-    .inputs input{
+
+    .inputs input {
         width: 100%;
         height: 3em;
         margin: 15px auto;
@@ -42,12 +44,13 @@
         border: 2px solid #bbb;
         border-radius: 1.5em;
     }
-    #login{
+
+    #register {
         width: 50%;
         left: 0;
         right: 0;
         position: absolute;
-        margin:50px auto 0;
+        margin: 50px auto 0;
         height: 2em;
         line-height: 2em;
         border-radius: 1em;
@@ -56,15 +59,46 @@
         font-size: 22px;
         background: #337ab7;
     }
+
     @media (max-width: 768px) {
-        #login-div,.inputs{
+        #register-div, .inputs {
             width: 350px;
         }
     }
+
     @media (min-width: 992px) {
-        #login-div,.inputs{
+        #register-div, .inputs {
             width: 450px;
         }
+
+        /*.required-field > label::after {
+               content: '*';
+               color: red;
+               margin-left: 0.25rem;
+           }*/
+    }
+
+    .login {
+        width: 100%;
+        text-align: center;
+        color: #777;
+    }
+
+    .login a {
+        color: #1d75b3;
+        font-size: 18px;
+        margin: auto 5px;
+    }
+
+    .login a:hover {
+        text-decoration: underline;
+    }
+
+    .inputs .warning {
+        color: red;
+        width: 100%;
+        text-align: center;
+        margin: 0;
     }
 </style>
 <body>
@@ -85,8 +119,6 @@
                     <li><a href="#">退出登录</a></li>
                 </ul>
             </li>
-
-
         </ul>
     </div>
     <div class="small-nav">
@@ -104,24 +136,60 @@
     </div>
 </div>
 <div class="center-bar">
-
-    <!--<img class="left-pic" src="img/yuanxiao.jpg">-->
-    <div id="login-div">
+    <div id="register-div">
         <h2>用户注册</h2>
-        <div class="inputs">
-            <input type="text" placeholder="账号">
-            <input type="password" placeholder="密码">
-            <input type="password" placeholder="确认密码">
-        </div>
-        <button id="login">注册</button>
+        <form class="inputs">
+            <input type="text" placeholder="账号" v-model="userName"/>
+            <input type="email" placeholder="邮箱" v-model="email"/>
+            <input type="password" placeholder="密码" v-model="password"/>
+            <input type="password" placeholder="确认密码" v-model="ensurePassword"/>
+            <p class="warning">{{msg}}</p>
+        </form>
+        <button id="register" v-on:click="register">注册</button>
+        <div class="login">已有账号？去<a href="login.html">登录</a></div>
     </div>
 </div>
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--<script src="js/vue-form.js"></script>-->
+<script src="js/qs.js"></script>
+<script src="js/axios.js"></script>
 <script type="text/javascript">
 
+    new Vue({
+        el: '#register-div',
+        data: {
+            userName: '',
+            email: '',
+            password: '',
+            ensurePassword: '',
+            msg: ''
+        },
+        methods: {
+            register: function () {
+                let data = Qs.stringify({
+                    userName: this.userName,
+                    userEmail: this.email,
+                    userPassword: this.password
+                });
+                axios.post('/user/register', data,
+                    {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+                    .then(response => {
+                            if (response.data.statusCode === "SUCCESS") {
+
+                            }
+                            else {
+                                this.msg = response.data.msg;
+                            }
+                        }
+                    )
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    });
 </script>
 </html>

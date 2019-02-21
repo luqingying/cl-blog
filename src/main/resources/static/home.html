@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-blind="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
@@ -20,8 +21,9 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="link.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
-                <ul class="nav-pulldown" v-show="isShow" >
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow">
+                <img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow">
                     <li><a href="info.html">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
@@ -47,7 +49,7 @@
         <div class="articles-bar main" id="article">
             <div class="article" v-for="item in dataList">
                 <div class="article-cover-pic">
-                    <img src="{{item.article.articleCoverUrl}}">
+                    <img :src="item.article.articleCoverUrl">
                 </div>
                 <div class="article-brief">
                     <h3 class="article-title">{{item.article.articleName}}</h3>
@@ -64,11 +66,12 @@
             </div>
             <ul class="pagination">
                 <li>&laquo;</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
+                <li v-for="page in pageInfo.navigatepageNums"
+                    v-bind:class="{'active':page==pageNum}">
+                    <a href="#" @change="btnClick(2)">
+                        {{page}}
+                    </a>
+                </li>
                 <li>&raquo;</li>
             </ul>
         </div>
@@ -82,7 +85,7 @@
 
             <div id="latest-comment" class="partOfsidebar">
                 <h2 class="sidebar-title">最新评论</h2>
-                <ul class="sidebar-ul" v-for="comments in list">
+                <ul class="sidebar-ul" v-for="comments in commentList">
                     <li>{{comments.comment.commentContent}}</li>
                 </ul>
             </div>
@@ -95,41 +98,52 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/axios.js"></script>
 
 <!--suppress JSAnnotator -->
 </html>
 <script type="text/javascript">
-    new Vue({
-        el: '#article',
-        data() {
-            return {
-                info: null,
-                dataList: ['']
-            }
-        },
-        mounted() {
-            axios.get('/article/all')
-                .then(response => {
-                    this.dataList = response.data.resource.list;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-    });
+    import Vue from 'vue'
+    import vPage from 'v-page';
+    Vue.use(vPage);
+
+    /*let pageNum = 1;
+     pageNum++;
+     new Vue({
+     el: '#article',
+     data() {
+     return {
+     dataList: ['']
+     }
+     },
+     mounted() {
+     axios.get('/article/all', {
+     params: {
+     pageNum: pageNum
+     }
+     })
+     .then(response => {
+     this.dataList = response.data.resource.list;
+     })
+     .catch(function (error) {
+     console.log(error);
+     });
+     }
+     });
+     */
+
 
     new Vue({
             el: '#latest-comment',
             data() {
                 return {
-                    list: ["暂无评论"]
+                    commentList: [""]
                 }
             },
             mounted() {
                 axios.get('/comment/latest')
                     .then(response => {
-                        this.list = response.data.resource.list;
+                        this.commentList = response.data.resource.list;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -155,4 +169,45 @@
             }
         }
     );
+
+    new Vue({
+            el: '.pagination',
+            data() {
+                return {
+                    pageInfo: [""],
+                    size: 0,
+                    pageNum: 0
+                }
+            },
+            methods: {
+                btnClick: function (nextPage) {
+                    axios.get('/article/all ', {
+                        pageNum: nextPage
+                    })
+                        .then(response => {
+                            this.pageInfo = response.data.resource;
+                            this.pageNum = pageInfo.pageNum;
+                            this.size = pageInfo.pageSize;
+                            this.pageNum = pageInfo.pageNum;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+
+            },
+            mounted() {
+                axios.get('/article/all')
+                    .then(response => {
+                        this.pageInfo = response.data.resource;
+                        this.size = pageInfo.pageSize;
+                        this.pageNum = pageInfo.pageNum;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+    );
+
 </script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
@@ -38,7 +38,6 @@
         margin: auto;
         padding-top: 20px;
     }
-
 
     .edit-head-pic {
         background: rgba(0, 0, 0, 0.5);
@@ -224,16 +223,20 @@
             box-shadow: 0 6px 12px #ccc;
             display: none;
         }
-        .show.capsule-ul{
+
+        .show.capsule-ul {
             display: inline-block;
         }
+
         .pull-ico {
             display: inline-block;
         }
-        span.back{
+
+        span.back {
             background: url("img/pullleft.svg");
             background-size: 100%;
         }
+
         .main-information {
             margin-left: 0;
         }
@@ -261,8 +264,10 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="link.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
-                <ul class="nav-pulldown" v-show="isShow" >
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
+                                                                                                     src="img/bear.jpeg"><a
+                    href="#">陈辰</a><span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow">
                     <li><a href="info.html">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
@@ -288,7 +293,7 @@
 <div class="center-bar">
     <div class="container">
         <div id="nameAndPic">
-            <img class="personal-headpic" src="img/bear.jpeg" @mouseenter="isHide = !isShow" >
+            <img class="personal-headpic" src="img/bear.jpeg" @mouseenter="isHide = !isShow">
             <a href="#" v-show="isShow" @mouseleave="isShow = !isShow">
                 <div class="edit-head-pic">
                     <img src="img/album.png">
@@ -298,84 +303,84 @@
             <span class="id-name">陈辰</span>
         </div>
         <div id="personal-information">
-        <div class="personal-leftNav">
-            <ul class="capsule-ul"  v-bind:class="{'show':isShow}">
-                <li class="active"><a href="#"><span class="ico"><img src="img/info.png"></span>个人资料</a></li>
-                <li ><a href="#"><span class="ico"><img src="img/password.png"></span>修改密码</a></li>
-                <li > <a href="#"><span class="ico"><img src="img/comment.png"></span>我的评论</a></li>
-            </ul>
-            <div class="pull-ico" v-on:click="isShow = !isShow" >
-                <span v-bind:class="{'back':isShow}"></span>
-            </div>
-        </div>
-        <div class="main-information">
-            <div></div>
-            <div class="partOfInfo">
-                <h2>个人资料</h2>
-                <form>
-                    <div class="row">
-                        <label>名称</label>
-                        <p class="form-static">陈辰</p>
-                    </div>
-                    <div class="row">
-                        <label>电子邮箱</label>
-                        <input type="email" placeholder="请输入电子邮箱" value="chenchen@Tencent.com">
-                    </div>
-                    <div class="row">
-                        <button class="btn save">保存</button>
-                    </div>
-                </form>
-            </div>
-            <div class="partOfInfo">
-            <h2>修改密码</h2>
-            <form>
-                <div class="row">
-                    <label>新密码</label>
-                    <input type="password" placeholder="请输入新的密码"  autocomplete='new-password'>
-                </div>
-                <div class="row">
-                    <label>确认密码</label>
-                    <input type="password" placeholder="请确认密码" autocomplete='new-password' >
-                </div>
-                <div class="row">
-                    <button class="btn changePSW">确认修改</button>
-                </div>
-            </form>
-        </div>
-            <div class="partOfInfo">
-                <h2>我的评论</h2>
-                <!-- <div class="nothing">暂无内容</div>-->
-                <div class="partOfComments">
-                    <a href="#">
-                        <p class="comments">
-                            我是猪我是猪
-                        </p>
-                    </a>
-                    <span class="commentTime">2019-2-18</span>
-                    <span class="viewComments"><a href="#">查看评论</a></span>
-                </div>
-                <div class="partOfComments">
-                    <a href="#">
-                        <p class="comments">
-                           哈哈哈哈
-                        </p>
-                    </a>
-                    <span class="commentTime">2019-2-18</span>
-                    <span class="viewComments"><a href="#">查看评论</a></span>
-                </div>
-                <ul class="pagination">
-                    <li>&laquo;</li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>&raquo;</li>
+            <div class="personal-leftNav">
+                <ul class="capsule-ul" v-bind:class="{'show':isShow}">
+                    <li class="active"><a href="#"><span class="ico"><img src="img/info.png"></span>个人资料</a></li>
+                    <li><a href="#"><span class="ico"><img src="img/password.png"></span>修改密码</a></li>
+                    <li><a href="#"><span class="ico"><img src="img/comment.png"></span>我的评论</a></li>
                 </ul>
+                <div class="pull-ico" v-on:click="isShow = !isShow">
+                    <span v-bind:class="{'back':isShow}"></span>
+                </div>
             </div>
-        </div>
+            <div class="main-information">
+                <div></div>
+                <div class="partOfInfo">
+                    <h2>个人资料</h2>
+                    <form>
+                        <div class="row">
+                            <label>名称</label>
+                            <p class="form-static">陈辰</p>
+                        </div>
+                        <div class="row">
+                            <label>电子邮箱</label>
+                            <input type="email" placeholder="请输入电子邮箱" value="chenchen@Tencent.com">
+                        </div>
+                        <div class="row">
+                            <button class="btn save">保存</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="partOfInfo">
+                    <h2>修改密码</h2>
+                    <form>
+                        <div class="row">
+                            <label>新密码</label>
+                            <input type="password" placeholder="请输入新的密码" autocomplete='new-password'>
+                        </div>
+                        <div class="row">
+                            <label>确认密码</label>
+                            <input type="password" placeholder="请确认密码" autocomplete='new-password'>
+                        </div>
+                        <div class="row">
+                            <button class="btn changePSW">确认修改</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="partOfInfo">
+                    <h2>我的评论</h2>
+                    <!-- <div class="nothing">暂无内容</div>-->
+                    <div class="partOfComments">
+                        <a href="#">
+                            <p class="comments">
+                                我是猪我是猪
+                            </p>
+                        </a>
+                        <span class="commentTime">2019-2-18</span>
+                        <span class="viewComments"><a href="#">查看评论</a></span>
+                    </div>
+                    <div class="partOfComments">
+                        <a href="#">
+                            <p class="comments">
+                                哈哈哈哈
+                            </p>
+                        </a>
+                        <span class="commentTime">2019-2-18</span>
+                        <span class="viewComments"><a href="#">查看评论</a></span>
+                    </div>
+                    <ul class="pagination">
+                        <li>&laquo;</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>&raquo;</li>
+                    </ul>
+                </div>
+            </div>
 
-    </div>
+        </div>
     </div>
 </div>
 <div class="webpage-footer">
@@ -384,42 +389,42 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/axios.js"></script>
 <script type="text/javascript">
-/*    new Vue({
-        el: '.personal-leftNav',
-        methods:{
-            mounted () {
-                window.addEventListener('scroll', this.handleScroll);
-            },
-            handleScroll () {
-                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                console.log(scrollTop);
+    /*    new Vue({
+            el: '.personal-leftNav',
+            methods:{
+                mounted () {
+                    window.addEventListener('scroll', this.handleScroll);
+                },
+                handleScroll () {
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                    console.log(scrollTop);
+                }
             }
-        }
-    });*/
+        });*/
 
     new Vue({
         el: '#nameAndPic',
         data: {
             isShow: false
         },
-        methods:{
-            onEnter:function (isShow) {
+        methods: {
+            onEnter: function (isShow) {
                 isShow = !isShow;
                 return isShow;
             },
-            onOut:function (isShow) {
+            onOut: function (isShow) {
                 isShow = !isShow;
                 return isShow;
             }
         }
-    })
+    });
 
     new Vue({
         el: '.personal-leftNav',
         data: {
-            isShow:false
+            isShow: false
         }
     })
 </script>
