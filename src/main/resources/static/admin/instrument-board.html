@@ -169,7 +169,7 @@
                     博客管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="active"><a href="instrument.html">仪表盘</a></li>
+                    <li class="active"><a href="instrument-board.html">仪表盘</a></li>
                     <li><a href="article.html">文章</a></li>
                     <li><a href="comment.html">评论</a></li>
                     <li><a href="log.html">日志</a></li>
@@ -197,7 +197,7 @@
 </div>
 <div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
     <ul class="nav">
-        <li class="active"><a href="instrument.html">仪表盘</a></li>
+        <li class="active"><a href="instrument-board.html">仪表盘</a></li>
         <li><a href="article.html">文章</a></li>
         <li><a href="comment.html">评论</a></li>
         <li><a href="log.html">日志</a></li>
@@ -286,8 +286,10 @@
 <script src="../js/bootstrap.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/axios.js"></script>
 <script type="text/javascript">
+    let articleCount, commentCount, logCount;
+
     new Vue({
             el: '#article',
             data() {
@@ -298,6 +300,7 @@
             mounted() {
                 axios.get('/article/all')
                     .then(response => {
+                        this.articleCount = response.data.resource.total;
                         this.articleList = response.data.resource.list;
                     })
                     .catch(function (error) {
@@ -316,6 +319,7 @@
             mounted() {
                 axios.get('/admin/comment/all')
                     .then(response => {
+                        this.commentCount = response.data.resource.total;
                         this.commentList = response.data.resource.list;
                     })
                     .catch(function (error) {
@@ -334,62 +338,8 @@
             mounted() {
                 axios.get('/admin/log/all')
                     .then(response => {
+                        this.logCount = response.data.resource.total;
                         this.logList = response.data.resource.list;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        }
-    );
-
-    new Vue({
-            el: '#articleCount',
-            data() {
-                return {
-                    articleCount: 0
-                }
-            },
-            mounted() {
-                axios.get('/article/count')
-                    .then(response => {
-                        this.articleCount = response.data.resource;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        }
-    );
-    new Vue({
-            el: '#commentCount',
-            data() {
-                return {
-                    commentCount: 0
-                }
-            },
-            mounted() {
-                axios.get('/admin/comment/count')
-                    .then(response => {
-                        this.commentCount = response.data.resource;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        }
-    );
-    new Vue({
-            el: '#logCount',
-            data() {
-                return {
-                    logCount: 0
-                }
-            },
-            mounted() {
-                axios.get('/admin/log/count')
-                    .then(response => {
-                        this.logCount = response.data.resource;
                     })
                     .catch(function (error) {
                         console.log(error);

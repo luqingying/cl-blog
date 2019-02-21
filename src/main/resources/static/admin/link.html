@@ -84,8 +84,8 @@
                     博客管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="instrument.html">仪表盘</a></li>
-                    <li ><a href="article.html">文章</a></li>
+                    <li><a href="instrument-board.html">仪表盘</a></li>
+                    <li><a href="article.html">文章</a></li>
                     <li><a href="comment.html">评论</a></li>
                     <li><a href="log.html">日志</a></li>
                     <li><a href="category.html">分类</a></li>
@@ -111,8 +111,8 @@
 </div>
 <div class="navbar navbar-default right-navbar  col-md-2 col-sm-3 hidden-xs">
     <ul class="nav">
-        <li><a href="instrument.html">仪表盘</a></li>
-        <li ><a href="article.html">文章</a></li>
+        <li><a href="instrument-board.html">仪表盘</a></li>
+        <li><a href="article.html">文章</a></li>
         <li><a href="comment.html">评论</a></li>
         <li><a href="log.html">日志</a></li>
         <li><a href="category.html">分类</a></li>
@@ -134,14 +134,15 @@
         </tr>
         </thead>
         <tbody id="link">
-        <tr  v-for="links in linkList">
+        <tr v-for="links in linkList">
             <td>{{links.link.linkId}}</td>
-            <td><a href="https://www.baidu.com">{{links.link.linkUrl}}</a></td>
+            <td><a href="{{links.link.linkUrl}}">{{links.link.linkUrl}}</a></td>
             <td>{{links.link.linkDescription}}</td>
             <td>{{links.link.gmtCreate}}</td>
             <td>{{links.link.gmtModified}}</td>
             <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLinkModal">编辑</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLinkModal">编辑
+                </button>
                 <button type="button" class="btn btn-danger">删除</button>
             </td>
         </tr>
@@ -153,20 +154,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" >编辑友链</h4>
+                    <h4 class="modal-title">编辑友链</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="linkUrl" class="col-sm-2 control-label">友链URL</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="linkUrl" placeholder="请输入URL" value="www.baidu.com">
+                                <input type="text" class="form-control" id="linkUrl" placeholder="请输入URL"
+                                       value="www.baidu.com">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="linkDescription" class="col-sm-2 control-label">类名</label>
+                            <label for="linkDescription" class="col-sm-2 control-label">友链名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="linkDescription" placeholder="请输入描述" value="百度">
+                                <input type="text" class="form-control" id="linkDescription" placeholder="请输入信息"
+                                       value="百度">
                             </div>
                         </div>
                     </form>
@@ -199,7 +202,7 @@
 <script src="../js/bootstrap.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/global.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/axios.js"></script>
 <script type="text/javascript">
     new Vue({
             el: '#link',
