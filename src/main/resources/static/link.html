@@ -6,13 +6,60 @@
 </head>
 <link rel="stylesheet" href="css/global.css" type="text/css"/>
 <link rel="stylesheet" href="scss/global.css" type="text/css"/>
-<body>
 <style type="text/css">
-    .webpage-footer{
-        position: fixed;
-        bottom: 0;
+    .center-bar .container {
+        padding: 100px 40px;
+    }
+
+    .friend-link {
+        width: 32%;
+        display: inline-block;
+    }
+
+    .ico {
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        background: url("img/blog.svg");
+        background-size: 100%;
+    }
+
+    .friend-link {
+        height: 32px;
+        line-height: 32px;
+        /*color: #bf9230;*/
+        color: #777;
+        margin: 15px auto;
+    }
+
+    .friend-link a {
+        position: absolute;
+        margin-left: 10px;
+        font-size: 18px;
+    }
+
+    .friend-link a:hover {
+        color: #bf9230;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: 100%;
+            padding: 40px;
+        }
+
+        .friend-link {
+            width: 49%;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .center-bar .container {
+            width: 768px;
+        }
     }
 </style>
+<body>
 <div class="top-nav">
     <div class="container top-nav-container">
         <ul class="top-nav-ul">
@@ -22,8 +69,10 @@
             <li><a href="about.html">关于</a></li>
             <li><a href="link.html">友链</a></li>
             <!--        <li><a href="#">登录</a></li>-->
-            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head" src="img/bear.jpeg"><a href="#">陈辰</a><span class="pull-down-ico"></span>
-                <ul class="nav-pulldown" v-show="isShow" >
+            <li class="pull-down" @mouseenter="isShow = !isShow" @mouseleave="isShow = !isShow"><img class="nav-head"
+                                                                                                     href="#">陈辰</a>
+                <span class="pull-down-ico"></span>
+                <ul class="nav-pulldown" v-show="isShow">
                     <li><a href="info.html">个人中心</a></li>
                     <li><a href="#">退出登录</a></li>
                 </ul>
@@ -47,13 +96,19 @@
     </div>
 </div>
 <div class="center-bar">
-</div>
-<div class="webpage-footer">
+    <div class="container">
+        <div class="friend-link">
+            <span class="ico"></span>
+            <a href="www.baidu.com">百度</a>
+        </div>
+    </div>
 </div>
 </body>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
+<!--<script src="js/vue-form.js"></script>-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 
 </script>
