@@ -1,6 +1,6 @@
 body {
     background-color: #f9f9f9;
-    margin:auto 0;
+    margin: auto 0;
 }
 
 * {
@@ -16,59 +16,65 @@ ul {
 li {
     text-decoration: none;
 }
-a{
+
+a {
     text-decoration: none;
     color: inherit;
 }
 
-.top-nav{
+.top-nav {
     width: 100%;
-    margin-top:-5px ;
+    margin-top: -5px;
     background-color: white;
     z-index: 1;
 }
 
-.menuSAndH{
-     background:url("../img/menu-icon.png");
-     border: none;
- }
-.top-nav-container{
-    height:70px;
+.menuSAndH {
+    background: url("../img/menu-icon.png");
+    border: none;
 }
-.top-nav-ul{
-/*    padding-inline-start: 0;*/
+
+.top-nav-container {
+    height: 70px;
+}
+
+.top-nav-ul {
+    /*    padding-inline-start: 0;*/
     margin: 0;
     position: absolute;
     right: 0;
 }
-.top-nav-ul li{
+
+.top-nav-ul li {
     display: inline-block;
     padding: 0 20px;
-    color:#999;
+    color: #999;
 }
-.top-nav-ul li:hover{
+
+.top-nav-ul li:hover {
     color: black;
 }
 
-
-
-.snav-ul,.snav-ul li{
+.snav-ul, .snav-ul li {
     width: 100%;
     z-index: 100;
 }
-.snav-ul{
+
+.snav-ul {
     position: absolute;
-    top:50px;
+    top: 50px;
     z-index: 10;
     background-color: white;
-    padding:0;
+    padding: 0;
 }
-.snav-ul li{
+
+.snav-ul li {
     line-height: 2em;
     color: #515151;
     padding: 5px 15px;
 }
-.snav-ul li:hover{
+
+.snav-ul li:hover {
     background-color: #ddd;
 }
 
@@ -89,15 +95,17 @@ a{
     background: url("../img/pullDown.svg");
     content: '';
 }
-.top-nav-ul > li{
+
+.top-nav-ul > li {
     z-index: 10;
     position: relative;
-    top:0;
+    top: 0;
 }
-.pull-down{
+
+.pull-down {
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
 }
 
 .nav-pulldown {
@@ -107,17 +115,18 @@ a{
     width: 100px;
     z-index: 999;
     background-color: white;
-    box-shadow:0 6px 12px #ccc;
+    box-shadow: 0 6px 12px #ccc;
 }
 
-.nav-pulldown li{
+.nav-pulldown li {
     text-align: center;
     width: 100%;
     padding: 0;
-    display:block;
+    display: block;
 
 }
-.nav-pulldown a{
+
+.nav-pulldown a {
     width: 100%;
 }
 
@@ -126,12 +135,14 @@ a{
     position: relative;
     margin: auto;
 }
-.archive-select,.selectClass,.topSelectBar{
+
+.archive-select, .selectClass, .topSelectBar {
     width: 100%;
 }
-.topSelectBar{
+
+.topSelectBar {
     padding: .5em;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
 .main, .sidebar {
@@ -154,32 +165,38 @@ a{
     max-height: 240px;
     overflow: hidden;
 }
+
 .article-brief {
     padding: 0 20px;
     margin-bottom: 20px;
 }
-.article-cover-pic img ,.article-content img {
+
+.article-cover-pic img, .article-content img {
     width: 100%;
 }
-.article-content{
+
+.article-content {
     background-color: white;
-    padding:15px;
+    padding: 15px;
 }
 
-.article-title, .sidebar-title,.content-title,h1,h2,h3 {
+.article-title, .sidebar-title, .content-title, h1, h2, h3 {
     font-weight: normal;
 }
-.content-title{
+
+.content-title {
     color: #444;
     line-height: 1em;
-    margin-bottom:15px ;
+    margin-bottom: 15px;
 }
-.article-title,.sidebar-title {
+
+.article-title, .sidebar-title {
     margin: 0;
     line-height: 2em;
     color: #666;
 }
-.article-title{
+
+.article-title {
     font-size: 24px;
 }
 
@@ -196,12 +213,14 @@ a{
     padding: 2px 5px;
     border-radius: 3px;
 }
-.content-brief{
+
+.content-brief {
     line-height: 1.5em;
-    height:3em;
+    height: 3em;
     color: #777;
     text-align: justify;
 }
+
 /*溢出省略号兼容*/
 /*.content-brief {
     position: relative;
@@ -218,44 +237,61 @@ a{
     background: linear-gradient(to right, transparent, white);
 }*/
 
-.content-brief{
+.content-brief {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
-.partOfsidebar{
-    padding:0 15px;
+
+.partOfsidebar {
+    padding: 0 15px;
 }
-.sidebar-title{
+
+.sidebar-title {
     font-size: 20px;
 }
-.sidebar-ul li{
-    list-style:disc;
+
+.sidebar-ul li {
+    list-style: disc;
     color: #797979;
     font-size: 14px;
     line-height: 2em;
 }
-.pagination{
+
+.pagination {
     text-align: center;
     left: 0;
     position: absolute;
     margin: auto;
-    padding:0 20px 20px;
+    padding: 0 20px 20px;
 }
-.pagination li{
+
+.pagination li {
     display: inline-block;
     width: 2em;
     height: 2em;
     line-height: 2em;
     text-align: center;
-    border: 1px solid #aaa;
+    border: none;
     color: #777777;
 }
-.center-bar{
+
+.pagination .active {
+    background: #1d75b3;
+    color: white;
+    border: none;
+}
+
+.pagination .hide {
+    display: none;
+}
+
+.center-bar {
     margin-bottom: 100px;
 }
+
 .webpage-footer {
     width: 100%;
     height: 150px;

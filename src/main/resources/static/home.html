@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-blind="http://www.w3.org/1999/xhtml"
-      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
@@ -47,33 +46,38 @@
 <div class="center-bar">
     <div class="container">
         <div class="articles-bar main" id="article">
-            <div class="article" v-for="item in dataList">
+            <div v-for="articles in pageInfo.list">
                 <div class="article-cover-pic">
-                    <img :src="item.article.articleCoverUrl">
+                    <img :src="articles.article.articleCoverUrl">
                 </div>
                 <div class="article-brief">
-                    <h3 class="article-title">{{item.article.articleName}}</h3>
+                    <h3 class="article-title">{{articles.article.articleName}}</h3>
                     <div class="title-spans">
-                        <span>{{item.article.gmtCreate}}</span>
-                        <span>{{item.creator.user.userName}}</span>
-                        <span>{{item.article.articleReading}}次浏览</span>
+                        <span>{{articles.article.gmtCreate}}</span>
+                        <span>{{articles.creator.user.userName}}</span>
+                        <span>{{articles.article.articleReading}}次浏览</span>
                     </div>
-                    <p class="content-brief"> {{item.article.articleDescription}}</p>
+                    <p class="content-brief"> {{articles.article.articleDescription}}</p>
                     <div class="article-tags">
-                        <span v-for="categories in item.categories">#{{categories.category.categoryContent}}</span>
+                        <span v-for="categories in articles.categories">#{{categories.category.categoryContent}}</span>
                     </div>
                 </div>
             </div>
             <ul class="pagination">
-                <li>&laquo;</li>
+                <li :class="{'hide':!pageInfo.hasPreviousPage}">
+                    <a href="#" v-on:click="btnClick(pageInfo.prePage)">&laquo;</a>
+                </li>
                 <li v-for="page in pageInfo.navigatepageNums"
-                    v-bind:class="{'active':page==pageNum}">
-                    <a href="#" @change="btnClick(2)">
+                    :class="{'active':page === pageNum}">
+                    <a href="#" v-on:click="btnClick(page)">
                         {{page}}
                     </a>
                 </li>
-                <li>&raquo;</li>
+                <li :class="{'hide':!pageInfo.hasNextPage}">
+                    <a href="#" v-on:click="btnClick(pageInfo.nextPage)">&raquo;</a>
+                </li>
             </ul>
+
         </div>
         <div class="right-sidebar sidebar">
             <div id="category" class="partOfsidebar">
@@ -103,36 +107,6 @@
 <!--suppress JSAnnotator -->
 </html>
 <script type="text/javascript">
-    import Vue from 'vue'
-    import vPage from 'v-page';
-    Vue.use(vPage);
-
-    /*let pageNum = 1;
-     pageNum++;
-     new Vue({
-     el: '#article',
-     data() {
-     return {
-     dataList: ['']
-     }
-     },
-     mounted() {
-     axios.get('/article/all', {
-     params: {
-     pageNum: pageNum
-     }
-     })
-     .then(response => {
-     this.dataList = response.data.resource.list;
-     })
-     .catch(function (error) {
-     console.log(error);
-     });
-     }
-     });
-     */
-
-
     new Vue({
             el: '#latest-comment',
             data() {
@@ -155,7 +129,7 @@
             el: '#category',
             data() {
                 return {
-                    categoryList: ["暂无分类"]
+                    categoryList: [""]
                 }
             },
             mounted() {
@@ -171,37 +145,34 @@
     );
 
     new Vue({
-            el: '.pagination',
+            el: '#article',
             data() {
                 return {
                     pageInfo: [""],
-                    size: 0,
                     pageNum: 0
                 }
             },
             methods: {
                 btnClick: function (nextPage) {
-                    axios.get('/article/all ', {
-                        pageNum: nextPage
+                    axios.get('/article/all', {
+                        params: {
+                            pageNum: nextPage
+                        }
                     })
                         .then(response => {
                             this.pageInfo = response.data.resource;
-                            this.pageNum = pageInfo.pageNum;
-                            this.size = pageInfo.pageSize;
-                            this.pageNum = pageInfo.pageNum;
+                            this.pageNum = this.pageInfo.pageNum;
                         })
                         .catch(function (error) {
                             console.log(error);
                         });
                 }
-
             },
             mounted() {
                 axios.get('/article/all')
                     .then(response => {
                         this.pageInfo = response.data.resource;
-                        this.size = pageInfo.pageSize;
-                        this.pageNum = pageInfo.pageNum;
+                        this.pageNum = this.pageInfo.pageNum;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -209,5 +180,4 @@
             }
         }
     );
-
 </script>
