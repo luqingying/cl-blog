@@ -23,6 +23,10 @@ public class UserConfiguration {
 
     public static int MinPasswordLength;
 
+    public static int MaxEmailLength;
+
+    public static int MinEmailLength;
+
     public static String PasswordSalt;
 
     @Value("${max-username-length}")
@@ -43,6 +47,16 @@ public class UserConfiguration {
     @Value("${min-password-length}")
     public void setMinPasswordLength(String minPasswordLength) {
         UserConfiguration.MinPasswordLength = Integer.parseInt(minPasswordLength);
+    }
+
+    @Value("${max-email-length}")
+    public void setMaxEmailLength(String maxEmailLength) {
+        UserConfiguration.MaxEmailLength = Integer.parseInt(maxEmailLength);
+    }
+
+    @Value("${min-email-length}")
+    public void setMinEmailLength(String minEmailLength) {
+        UserConfiguration.MinEmailLength = Integer.parseInt(minEmailLength);
     }
 
     @Value("${password-salt}")

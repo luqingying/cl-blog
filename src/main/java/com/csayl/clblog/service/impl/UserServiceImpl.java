@@ -121,18 +121,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserBo login(UserBo userBo) throws WrongFieldException {
         User user;
-        if (userBo == null || (user = userBo.getUser()) == null) {
+        if (userBo == null || (user = userBo.getUser()) == null
+                || user.getUserName() == null || user.getUserPassword() == null) {
             throw new WrongFieldException("请正确输入个人信息");
         }
-        //密码加密
-        String md5Password = DigestUtils.md5DigestAsHex((user.getUserPassword() + UserConfiguration.PasswordSalt).getBytes());
-        user.setUserPassword(md5Password);
+
         if (user.getUserName().length() >= UserConfiguration.MaxUsernameLength
                 || user.getUserName().length() <= UserConfiguration.MinUsernameLength
                 || user.getUserPassword().length() >= UserConfiguration.MaxPasswordLength
                 || user.getUserPassword().length() <= UserConfiguration.MinPasswordLength) {
             throw new WrongFieldException("用户名或密码长度错误，请重新输入");
         }
+
+        //密码加密
+        String md5Password = DigestUtils.md5DigestAsHex((user.getUserPassword() + UserConfiguration.PasswordSalt).getBytes());
+        user.setUserPassword(md5Password);
+
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUserNameEqualTo(user.getUserName())
                 .andUserPasswordEqualTo(user.getUserPassword());
