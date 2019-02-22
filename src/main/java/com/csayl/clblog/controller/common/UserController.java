@@ -4,6 +4,7 @@ import com.csayl.clblog.dto.ResponseData;
 import com.csayl.clblog.exception.NoSuchBeanException;
 import com.csayl.clblog.exception.WrongFieldException;
 import com.csayl.clblog.model.bo.UserBo;
+import com.csayl.clblog.model.domain.User;
 import com.csayl.clblog.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +43,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseData<UserBo> login(UserBo userBo, HttpServletRequest request) {
+    public ResponseData<UserBo> login(User user, HttpServletRequest request) {
         UserBo info = (UserBo) request.getSession().getAttribute("info");
         if (info != null) {
             return ResponseData.fail("已经登录");
         }
+        UserBo userBo = new UserBo(user);
         try {
             userBo = userService.login(userBo);
         } catch (WrongFieldException e) {
@@ -57,13 +59,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseData<UserBo> register(UserBo userBo) {
+    public ResponseData<UserBo> register(User user) {
         try {
-            userService.insertUser(userBo);
+            userService.insertUser(new UserBo(user));
         } catch (WrongFieldException e) {
             return ResponseData.fail(e.getMessage());
         }
-        return ResponseData.succeed(userBo);
+        return ResponseData.succeed(null);
     }
 
 

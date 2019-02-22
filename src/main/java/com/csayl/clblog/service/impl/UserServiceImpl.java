@@ -16,9 +16,7 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -49,17 +47,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(UserBo userBo) throws WrongFieldException {
         User user;
-        if (userBo == null || (user = userBo.getUser()) == null) {
+        if (userBo == null || (user = userBo.getUser()) == null
+                || user.getUserName() == null || user.getUserPassword() == null || user.getUserEmail() == null) {
             throw new WrongFieldException("请正确输入个人信息");
         }
         //置管理员为false
         user.setIsAdmin(false);
-        if (user.getUserName().length() >= UserConfiguration.MaxUsernameLength
-                || user.getUserName().length() <= UserConfiguration.MinUsernameLength
-                || user.getUserPassword().length() >= UserConfiguration.MaxPasswordLength
-                || user.getUserPassword().length() <= UserConfiguration.MinPasswordLength) {
-            throw new WrongFieldException("用户名或密码长度错误，请重新输入");
-        }
+
+        checkLength(user);
+
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUserNameEqualTo(user.getUserName());
         if (userMapper.countByExample(userExample) != 0) {
@@ -80,18 +76,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserBo userBo) throws WrongFieldException {
         User user;
-        if (userBo == null || (user = userBo.getUser()) == null) {
+        if (userBo == null || (user = userBo.getUser()) == null
+                || user.getUserName() == null || user.getUserPassword() == null) {
             throw new WrongFieldException("请正确输入个人信息");
         }
         //置管理员为false
         user.setIsAdmin(false);
         user.setUserName(null);
-        if (user.getUserName().length() >= UserConfiguration.MaxUsernameLength
-                || user.getUserName().length() <= UserConfiguration.MinUsernameLength
-                || user.getUserPassword().length() >= UserConfiguration.MaxPasswordLength
-                || user.getUserPassword().length() <= UserConfiguration.MinPasswordLength) {
-            throw new WrongFieldException("用户名或密码长度错误，请重新输入");
-        }
+
+        checkLength(user);
+
         String md5Password = DigestUtils.md5DigestAsHex((user.getUserPassword() + UserConfiguration.PasswordSalt).getBytes());
         user.setUserPassword(md5Password);
         try {
@@ -122,16 +116,11 @@ public class UserServiceImpl implements UserService {
     public UserBo login(UserBo userBo) throws WrongFieldException {
         User user;
         if (userBo == null || (user = userBo.getUser()) == null
-                || user.getUserName() == null || user.getUserPassword() == null) {
+                || user.getUserName() == null || user.getUserPassword() == null || user.getUserEmail() == null) {
             throw new WrongFieldException("请正确输入个人信息");
         }
 
-        if (user.getUserName().length() >= UserConfiguration.MaxUsernameLength
-                || user.getUserName().length() <= UserConfiguration.MinUsernameLength
-                || user.getUserPassword().length() >= UserConfiguration.MaxPasswordLength
-                || user.getUserPassword().length() <= UserConfiguration.MinPasswordLength) {
-            throw new WrongFieldException("用户名或密码长度错误，请重新输入");
-        }
+        checkLength(user);
 
         //密码加密
         String md5Password = DigestUtils.md5DigestAsHex((user.getUserPassword() + UserConfiguration.PasswordSalt).getBytes());
@@ -209,5 +198,25 @@ public class UserServiceImpl implements UserService {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria().andPUserIdEqualTo(userId);
         commentMapper.deleteByExample(commentExample);
+    }
+
+    /**
+     * 检查 user 邮箱，用户名，密码长度
+     *
+     * @param user 待检查的对象
+     * @throws WrongFieldException 长度错误
+     */
+    private static void checkLength(User user) throws WrongFieldException {
+        if (user.getUserEmail() != null
+                && (user.getUserEmail().length() >= UserConfiguration.MaxEmailLength
+                || user.getUserEmail().length() <= UserConfiguration.MinEmailLength)) {
+            throw new WrongFieldException("邮箱长度错误，请重新输入");
+        }
+        if (user.getUserName().length() >= UserConfiguration.MaxUsernameLength
+                || user.getUserName().length() <= UserConfiguration.MinUsernameLength
+                || user.getUserPassword().length() >= UserConfiguration.MaxPasswordLength
+                || user.getUserPassword().length() <= UserConfiguration.MinPasswordLength) {
+            throw new WrongFieldException("用户名或密码长度错误，请重新输入");
+        }
     }
 }
