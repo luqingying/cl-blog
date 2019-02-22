@@ -22,6 +22,36 @@ new Vue({
     }
 });
 
-/**
- * Created by luqingying on 2019/1/23.
- */
+new Vue({
+    el: '.webpage-footer',
+    data (){
+        return {
+            fullHeight: document.documentElement.clientHeight,
+            height : document.body.scrollHeight
+        }
+    },
+    mounted() {
+        const that = this
+        window.onresize = () => {
+            return (() => {
+                window.fullHeight = document.documentElement.clientHeight
+                that.fullHeight = window.fullHeight
+                that.height = document.body.scrollHeight
+            })()
+        }
+    },
+    watch: {
+        fullHeight (fval) {
+            if(!this.timer) {
+                this.fullHeight = fval;
+                this.timer = true
+                let that = this
+                setTimeout(function (){
+                    that.timer = false
+                },400)
+            }
+        }
+    }
+
+});
+
