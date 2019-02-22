@@ -17,5 +17,5 @@ import java.io.Serializable;
 public class CommentBo implements Serializable {
     private Comment comment;
 
-    private UserBo userBo;
+    private UserBo creator;
 }

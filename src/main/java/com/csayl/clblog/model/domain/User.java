@@ -25,4 +25,9 @@ public class User {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public User(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
 }

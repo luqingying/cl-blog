@@ -1,12 +1,16 @@
 package com.csayl.clblog.model.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class FriendlyLink  implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class FriendlyLink implements Serializable {
     private Integer linkId;
 
     private String linkUrl;
