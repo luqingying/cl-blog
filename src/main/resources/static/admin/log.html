@@ -120,7 +120,7 @@
         <li><a href="link.html">友链</a></li>
     </ul>
 </div>
-<div class="container col-md-10 col-sm-9 col-xs-12 pull-right main">
+<div class="container col-md-10 col-sm-9 col-xs-12 pull-right main" id="log">
     <h2>日志管理</h2>
     <table class="table table-striped table-hover table-responsive col-md-12">
         <thead>
@@ -132,8 +132,8 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody id="log">
-        <tr v-for="logs in logList">
+        <tbody>
+        <tr v-for="logs in pageInfo.list">
             <td>{{logs.log.logId}}</td>
             <td>{{logs.log.visitorIp}}</td>
             <td>{{logs.log.visitUrl}}</td>
@@ -158,13 +158,18 @@
     </table>
     <nav style="text-align: center">
         <ul class="pagination">
-            <li class="disabled"><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            <li v-if="pageInfo.hasPreviousPage">
+                <a href="#" v-on:click="btnClick(pageInfo.prePage)">&laquo;</a>
+            </li>
+            <li v-for="page in pageInfo.navigatepageNums"
+                :class="{'active':page === pageNum}">
+                <a href="#" v-on:click="btnClick(page)">
+                    {{page}}
+                </a>
+            </li>
+            <li v-if="pageInfo.hasNextPage">
+                <a href="#" v-on:click="btnClick(pageInfo.nextPage)">&raquo;</a>
+            </li>
         </ul>
     </nav>
 
@@ -182,13 +187,33 @@
             el: '#log',
             data() {
                 return {
-                    logList: [""]
+                    pageInfo: [""],
+                    pageNum: 0
+                }
+            },
+            methods: {
+                btnClick: function (nextPage) {
+                    if (nextPage !== this.pageNum) {
+                        axios.get('/admin/log/all', {
+                            params: {
+                                pageNum: nextPage
+                            }
+                        })
+                            .then(response => {
+                                this.pageInfo = response.data.resource;
+                                this.pageNum = this.pageInfo.pageNum;
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
                 }
             },
             mounted() {
                 axios.get('/admin/log/all')
                     .then(response => {
-                        this.logList = response.data.resource.list;
+                        this.pageInfo = response.data.resource;
+                        this.pageNum = this.pageInfo.pageNum;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -196,7 +221,6 @@
             }
         }
     );
-
 
 </script>
 </html>

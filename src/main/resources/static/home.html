@@ -48,10 +48,11 @@
         <div class="articles-bar main" id="article">
             <div v-for="articles in pageInfo.list">
                 <div class="article-cover-pic">
-                    <img :src="articles.article.articleCoverUrl">
+                    <img :src="'http://'+articles.article.articleCoverUrl">
                 </div>
                 <div class="article-brief">
-                    <h3 class="article-title">{{articles.article.articleName}}</h3>
+                    <h3 class="article-title"><a :href="'article.html?id='+articles.article.articleId">{{articles.article.articleName}}</a>
+                    </h3>
                     <div class="title-spans">
                         <span>{{articles.article.gmtCreate}}</span>
                         <span>{{articles.creator.user.userName}}</span>
@@ -59,12 +60,13 @@
                     </div>
                     <p class="content-brief"> {{articles.article.articleDescription}}</p>
                     <div class="article-tags">
-                        <span v-for="categories in articles.categories">#{{categories.category.categoryContent}}</span>
+                        <span v-for="categories in articles.categories"><a
+                                :href="'category.html?id='+categories.category.categoryId">#{{categories.category.categoryContent}}</a></span>
                     </div>
                 </div>
             </div>
             <ul class="pagination">
-                <li :class="{'hide':!pageInfo.hasPreviousPage}">
+                <li v-if="pageInfo.hasPreviousPage">
                     <a href="#" v-on:click="btnClick(pageInfo.prePage)">&laquo;</a>
                 </li>
                 <li v-for="page in pageInfo.navigatepageNums"
@@ -73,11 +75,10 @@
                         {{page}}
                     </a>
                 </li>
-                <li :class="{'hide':!pageInfo.hasNextPage}">
+                <li v-if="pageInfo.hasNextPage">
                     <a href="#" v-on:click="btnClick(pageInfo.nextPage)">&raquo;</a>
                 </li>
             </ul>
-
         </div>
         <div class="right-sidebar sidebar">
             <div id="category" class="partOfsidebar">
@@ -103,8 +104,6 @@
 <script src="js/vue.js"></script>
 <script src="js/global.js"></script>
 <script src="js/axios.js"></script>
-
-<!--suppress JSAnnotator -->
 </html>
 <script type="text/javascript">
     new Vue({
@@ -154,18 +153,20 @@
             },
             methods: {
                 btnClick: function (nextPage) {
-                    axios.get('/article/all', {
-                        params: {
-                            pageNum: nextPage
-                        }
-                    })
-                        .then(response => {
-                            this.pageInfo = response.data.resource;
-                            this.pageNum = this.pageInfo.pageNum;
+                    if (nextPage !== pageNum) {
+                        axios.get('/article/all', {
+                            params: {
+                                pageNum: nextPage
+                            }
                         })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                            .then(response => {
+                                this.pageInfo = response.data.resource;
+                                this.pageNum = this.pageInfo.pageNum;
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
                 }
             },
             mounted() {
@@ -180,4 +181,5 @@
             }
         }
     );
+
 </script>

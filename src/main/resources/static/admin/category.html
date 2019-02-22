@@ -313,16 +313,14 @@
 
     <nav style="text-align: center">
         <ul class="pagination">
-            <li class="disabled"><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            <li v-if="pageInfo.hasPreviousPage"><a href="#" v-on:click="btnClick(pageInfo.prePage)">&laquo;</a></li>
+            <li v-for="page in pageInfo.navigatepageNums" :class="{'active':page === pageNum}">
+                <a href="#" v-on:click="btnClick(page)">
+                    {{page}} </a>
+            </li>
+            <li v-if="pageInfo.hasNextPage"><a href="#" v-on:click="btnClick(pageInfo.nextPage)">&raquo;</a></li>
         </ul>
     </nav>
-
 </div>
 
 </div>
