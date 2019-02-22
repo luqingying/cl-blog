@@ -2,13 +2,14 @@ package com.csayl.clblog.controller.admin;
 
 import com.csayl.clblog.dto.ResponseData;
 import com.csayl.clblog.exception.NoSuchBeanException;
+import com.csayl.clblog.exception.WrongFieldException;
+import com.csayl.clblog.model.bo.CommentBo;
 import com.csayl.clblog.service.CommentService;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: chen
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BackCommentController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BackCommentController.class);
 
+    private final static String PAGE_SIZE = "5";
+
     private final CommentService commentService;
 
     @Autowired
@@ -26,7 +29,7 @@ public class BackCommentController {
         this.commentService = commentService;
     }
 
-     @PostMapping("/delete")
+    @PostMapping("/delete")
     public ResponseData<String> deleteComment(Long commentId) {
         try {
             commentService.deleteCommentByCommentId(commentId);
@@ -35,5 +38,18 @@ public class BackCommentController {
             return ResponseData.fail(e.getMessage());
         }
         return ResponseData.succeed();
+    }
+
+    @GetMapping("/all")
+    public ResponseData<PageInfo<CommentBo>> getArticles(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                                         @RequestParam(value = "pageSize", required = false, defaultValue = PAGE_SIZE) Integer pageSize) {
+        PageInfo<CommentBo> pageInfo;
+        try {
+            pageInfo = commentService.selectComments(pageNum, pageSize);
+        } catch (NoSuchBeanException | WrongFieldException e) {
+            LOGGER.debug("查询所有文章时，", e);
+            return ResponseData.fail(e.getMessage());
+        }
+        return ResponseData.succeed(pageInfo);
     }
 }

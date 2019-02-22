@@ -35,6 +35,8 @@ public interface CommentService {
 
     PageInfo<CommentBo> selectLatestComments(Integer commentNum) throws WrongFieldException, NoSuchBeanException;
 
+    PageInfo<CommentBo> selectComments(Integer pageNum, Integer commentNum)  throws WrongFieldException, NoSuchBeanException;
+
     /**
      * 查询关于该用户、该文章的所有评论
      *

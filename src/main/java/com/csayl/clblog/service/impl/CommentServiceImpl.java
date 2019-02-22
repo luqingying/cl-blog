@@ -103,10 +103,16 @@ public class CommentServiceImpl implements CommentService {
     @Cacheable("comment")
     @Override
     public PageInfo<CommentBo> selectLatestComments(Integer commentNum) throws WrongFieldException, NoSuchBeanException {
+        return selectComments(1, commentNum);
+    }
+
+    @Cacheable("comment")
+    @Override
+    public PageInfo<CommentBo> selectComments(Integer pageNum, Integer commentNum) throws WrongFieldException, NoSuchBeanException {
         if (commentNum <= CommentConfiguration.MinCommentNum || commentNum >= CommentConfiguration.MaxCommentNum) {
             throw new WrongFieldException("请输入正确的评论数量");
         }
-        return selectComments(null, null, null, OrderBy.CREATE_TIME_DESC, 1, commentNum);
+        return selectComments(null, null, null, OrderBy.CREATE_TIME_DESC, pageNum, commentNum);
     }
 
     @Cacheable("comment")
